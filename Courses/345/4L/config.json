@@ -1,0 +1,87 @@
+{
+    "TAs": [
+      {
+        "first-name": "Hiroki",
+        "last-name": "Kawai",
+        "pronouns": "",
+        "email": "hkawai@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      }, {
+        "first-name": "Sean",
+        "last-name": "Buechele",
+        "pronouns": "",
+        "email": "sbuechele@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      }
+    ],
+    "Faculty": [
+      {
+        "first-name": "Paula",
+        "last-name": "Popescu",
+        "pronouns": "(She/Her/Hers)",
+        "email": "ppopescu@physics.ucsb.edu ",
+        "title":"Lecturer, Coordinator",
+        "img": "../../../people/photo/paulapopescu.jpg"
+      },
+      {
+        "first-name": "Deborah",
+        "last-name": "Fygenson",
+        "pronouns": "(She/Her/Hers)",
+        "email": "fygenson@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"Professor"
+      }
+    ],
+    "page-links": [
+      {
+        "name": "Lab 1",
+        "file": "lab1"
+      },
+      {
+        "name": "Lab 2",
+        "file": "lab2"
+      },
+      {
+        "name": "Lab 3",
+        "file": "lab3"
+      },
+      {
+        "name": "Lab 4",
+        "file": "lab4"
+      },
+      {
+        "name": "Lab 5",
+        "file": "lab5"
+      },
+      {
+        "name": "Lab 6",
+        "file": "lab6"
+      },
+      {
+        "name": "Reference Material",
+        "file": "references"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "nectir",
+        "file": "https://ucsb.nectir.io/channel/physics4l"
+      }
+    ],
+    "Course-info":
+      {
+        "name" : "Physics 4L"
+      }
+    
+  }

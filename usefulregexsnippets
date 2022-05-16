@@ -1,0 +1,35 @@
+
+Replace All Exercises with point valued versions.
+
+find
+:::\s*Exercise\s*\(*([-a-zA-Z0-9]*)\)*
+replace
+:::Exercise ($1|1 Point)
+
+
+Replace all measurements with latex
+
+find
+\s([0-9]+)(mm|cm)
+
+replace 
+$ $1 \\text{ $2}$
+
+
+Point bullets
+-\s([0-9\.]+)\s*[Pp]oints*
+- *($1 Points)*
+
+Good Table and Good Plot
+\sGood Table\s
+ [Good Table](?linkfile=FAQ#QHowdoIreceivefullcreditonatableinmylabreport) 
+
+\sGood Plot\s
+ [Good Plot](?linkfile=FAQ#QHowdoIreceivefullcreditonaplotinmylabreport)  
+
+Figure Fix
+:::\s*(R|L|)Figure (.*)
+:::Figure ($2| m|$1)
+
+:::Card Intro (.*)
+:::Intro ($1)

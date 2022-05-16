@@ -1,0 +1,106 @@
+{
+    "TAs": [
+      {
+        "first-name": "Anders",
+        "last-name": "Barzdukas",
+        "pronouns": "(He/Him/His)",
+        "email": "abarzdukas@umail.ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "1-4PM Wednesday, 4-7PM Wednesday",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      },
+      {
+        "first-name": "Mathilde",
+        "last-name": "Papillon",
+        "pronouns": "(She/Her/Hers)",
+        "email": "papillon@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "1-4PM Tuesday, 1-4PM Thursday, ",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      },
+      {
+        "first-name": "Owen",
+        "last-name": "Sheekey",
+        "pronouns": "(He/Him/His)",
+        "email": "osheekey@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "4-7PM Tuesday, 7-10PM Tuesday",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      },
+      {
+        "first-name": "Zihang",
+        "last-name": "Wang",
+        "pronouns": "(He/Him/His)",
+        "email": "zihangwang@ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "4-7PM and 7-10PM Thursday",        
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      }
+      
+    ],
+    "Faculty": [
+      {
+        "first-name": "Deborah",
+        "last-name": "Fygenson",
+        "pronouns": "(She/Her/Hers)",
+        "email": "fygenson@ucsb.edu",
+        "zoom": "7742495183",
+        "officehours": "",
+        "sectionhours": "",        
+        "img": "../../../people/photo/deborahfygenson.jpeg",
+        "title":"Professor"
+      },
+      {
+        "first-name": "Zak",
+        "last-name": "Espley",
+        "pronouns": "(He/Him/His)",
+        "email": "zespley@physics.ucsb.edu",
+        "zoom": "",
+        "officehours": "",
+        "sectionhours": "",        
+        "img": "../../../people/photo/zakespley.jpeg",
+        "title":"Coordinator"
+      }
+    ],
+    "page-links": [
+      {
+        "name": "Oscilloscope Lab",
+        "file": "labOscope"
+      },
+      {
+        "name": "Sound Lab",
+        "file": "labVsound"
+      },
+      {
+        "name": "RCL Circuits Lab",
+        "file": "labTau"
+      },
+      {
+        "name": "Refraction Lab",
+        "file": "labIndex"
+      },
+      {
+        "name": "Lens Lab",
+        "file": "labLenses"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "nectir",
+        "file": "https://ucsb.nectir.io/channel/phys-20bl-section-600-w22"
+      }
+    ],
+    "Course-info":
+      {
+        "name" : "Physics 20BL"
+      }
+    
+  }

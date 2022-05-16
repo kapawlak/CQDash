@@ -1,0 +1,72 @@
+{
+    "TAs": [
+      {
+        "first-name": "Henry",
+        "last-name": "Leung",
+        "pronouns": "",
+        "email": "yleung@ucsb.edu",
+        "room": "",
+        "officehours": "M 3-5 pm, T 6-8 pm",
+        "sectionhours": "[Monday 7-10PM] [Tuesday 3-5PM] [Wednesday 3-5PM, 5-7PM]",
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      },
+      {
+        "first-name": "William",
+        "last-name": "Huynh",
+        "pronouns": "",
+        "email": "whuynh@ucsb.edu",
+        "room": "",
+        "officehours": " Monday: 10am-1pm, 5pm-6pm",
+        "sectionhours": "[Monday 1-3PM, 3-5PM] [Wednesday 1-3PM]",
+        "img": "../../../people/photo/nopic.png",
+        "title":"TA"
+      },
+      {
+        "first-name": "Benjamin",
+        "last-name": "Lloyd",
+        "pronouns": "",
+        "email": " benjaminlloyd@ucsb.edu",
+        "room": "",
+        "officehours": "Tuesday 1:30-3:30 pm, Thursday 2-4 pm",
+        "sectionhours": "[Monday 5-7PM] [Wednesday 5-7PM, 7-10PM]",
+        "img": "../../../people/photo/benlloyd.jpeg",
+        "title":"TA"
+      }
+    ],
+    "Faculty": [
+      {
+        "first-name": "Kelly",
+        "last-name": "Pawlak",
+        "pronouns": "(She/Her/Hers)",
+        "email": "kapawlak@ucsb.edu",
+        "img": "../../../people/photo/kellypawlak.jpg",
+        "title":"Coordinator"
+      },
+      {
+        "first-name": "Paula",
+        "last-name": "Popescu",
+        "pronouns": "(She/Her/Hers)",
+        "email": "ppopescu@physics.ucsb.edu ",
+        "title":"Lecturer, Coordinator",
+        "img": "../../../people/photo/paulapopescu.jpg"
+      }
+    ],
+    "page-links": [
+      {
+        "name": "Example",
+        "file": "showcase"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "nectir",
+        "file": "https://ucsb.nectir.io/channel/physics6CL"
+      }
+    ],
+    "Course-info":
+      {
+        "name" : "Physics 6CL"
+      }
+    
+  }

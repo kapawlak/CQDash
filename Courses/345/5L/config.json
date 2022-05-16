@@ -1,0 +1,89 @@
+{
+    "TAs": [
+      {
+        "first-name": "Sam",
+        "last-name": "Brantly",
+        "pronouns": "(He/Him/His)",
+        "email": "sbrantly@ucsb.edu",
+        "officehours": "2-4 PM Tuesdays, 4-7 PM Wednesdays",
+        "sectionhours": "7-10 PM Wednesdays",        
+        "img": "",
+        "title":"TA"
+      },
+      {
+        "first-name": "Jesse",
+        "last-name": "Held",
+        "pronouns": "(He/Him/His)",
+        "email": "jheld@ucsb.edu",
+        "officehours": "2-4 PM & 5-7 PM Wednesdays",
+        "sectionhours": "1-4 PM Fridays",        
+        "img": "",
+        "title":"TA"
+      },
+      {
+        "first-name": "Vishank",
+        "last-name": "Jain-Sharma",
+        "pronouns": "(He/Him/His)",
+        "email": "vishank@ucsb.edu",
+        "officehours": "5-7 PM Tuesdays & Thursdays",
+        "sectionhours": "7-10 PM Thursdays",        
+        "img": "../../../people/photo/vishankjainsharma.jpg",
+        "title":"TA"
+      },
+      {
+        "first-name": "Moonsuk",
+        "last-name": "Jang",
+        "pronouns": "(He/Him/His)",
+        "email": "moonsuk@physics.ucsb.edu",
+        "officehours": "2-4 PM & 5-7 PM Thursdays",
+        "sectionhours": "7-10 PM Tuesdays",
+        "img": "",
+        "title":"TA"
+      }
+    ],
+    "Faculty": [
+      {
+        "first-name": "Deborah",
+        "last-name": "Fygenson",
+        "pronouns": "(She/Her/Hers)",
+        "email": "deborah@physics.ucsb.edu ",
+        "zoom": "https://ucsb.zoom.us/s/77742495183",
+        "officehours": "2-4 PM & 5-6 PM Tuesdays, Wednesdays, Thursdays",
+        "title":"Professor",
+        "img": "../../../people/photo/dkfygenson.jpg"
+      }
+    ],
+    "page-links": [
+      {
+        "name": "Atomic Spectra",
+        "file": "AS5L"
+      },
+      {
+        "name": "Diffraction & Interference",
+        "file": "DI5L"
+      },
+      {
+        "name": "Franck-Hertz",
+        "file": "FH5L"
+      },
+      {
+        "name": "Gamma Ray Absoprtion",
+        "file": "RA5L"
+      },
+      {
+        "name": "Photoelectric Effect",
+        "file": "PE5L"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "slack",
+        "file": "https://ucsb.nectir.io/channel/physics5L"
+      }
+    ],
+    "Course-info":
+      {
+        "name" : "Physics 5L"
+      }
+    
+  }

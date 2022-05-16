@@ -1,0 +1,39 @@
+
+//Replace all measurements with latex
+
+filter "Courses/6/BL/*.md"
+
+//Replace measurements
+replace-regex "\s([0-9]+)(mm|cm)"
+with "$ $1 \\text{ $2}$"
+
+//Replace Exercise/Acticity
+
+
+//Good Table and Good Plot
+replace-regex "\sGood Table\s"
+with "[Good Table](?linkfile=FAQ#QHowdoIreceivefullcreditonatableinmylabreport)" 
+
+replace-regex "\sGood Plot\s"
+with "[Good Plot](?linkfile=FAQ#QHowdoIreceivefullcreditonaplotinmylabreport)"
+
+//Figure Fix
+replace-regex ":::\s*(R|L|)Figure (.*)"
+with ":::Figure ($2| m|$1)"
+
+//Intro Card
+replace-regex ":::Card Intro (.*)"
+with ":::Intro ($1)"
+
+
+
+
+
+//Add Point Values to Exercises
+replace-regex ":::\s*Exercise\s*\(*([-a-zA-Z0-9]*)\)*"
+with ":::Exercise ($1|1 Point)"
+
+
+// //Point bullets
+// replace-regex "-\s([0-9\.]+)\s*[Pp]oints*"
+// with "- *($1 Points)*"
