@@ -222,3 +222,21 @@ h5.text-responsive{
 #Table-schedule td{
   vertical-align:middle
 }
+
+
+.lvl2.accordion-button:not(.collapsed){
+  background-color: #c9c9c9!important;
+}
+
+.lvl2.accordion-button{
+  padding-left: 2rem;
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.lvl3{
+  padding-left: 2.5rem;
+  padding-top: 4px!important;
+  padding-bottom: 4px!important;
+
+}
