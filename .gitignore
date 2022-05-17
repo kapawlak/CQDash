@@ -3,3 +3,4 @@ Courses/.DS_Store
 .vscode
 replace_regex
 usefulregexsnippets
+.sass-cache

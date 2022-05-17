@@ -31,7 +31,7 @@ let sitedata
 function init_nav(linkfile) {
   let lab_list = document.getElementById('lab_list')
   let TeamList = document.getElementById('Team')
-  fetch("config.json?v=" + Math.floor(Math.random() * 100000))
+  fetch(ABSOLUTE_LOCATION+"static/config.json?v=" + Math.floor(Math.random() * 100000))
     .then(response => {
       return response.json();
     })
@@ -41,7 +41,7 @@ function init_nav(linkfile) {
     includeHTML(linkfile)
 
 
-    document.getElementById('datasourcelabel').innerHTML = "<img height='30px' src='static/assets/img/CQSym.png' ></img>" + sitedata['Course-info']['name'];
+    document.getElementById('datasourcelabel').innerHTML = "<img height='30px' src='static/assets/img/CQSym.png' class='px-2'></img>" + sitedata['Course-info']['name'];
 
 
     for (i = 0; i < sitedata['page-links'].length; i++) {

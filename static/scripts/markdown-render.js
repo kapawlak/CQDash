@@ -48,7 +48,7 @@ function includeHTML(filenum = linkfile) {
     /*loop through a collection of all HTML elements:*/
     z = document.getElementById("maincontent");
 
-    file =  "static/pages/"+filenum + ".md" + '?v=' + rand
+    file =  ABSOLUTE_LOCATION+"static/pages/"+filenum + ".md" + '?v=' + rand
 
 
     if (file) {
