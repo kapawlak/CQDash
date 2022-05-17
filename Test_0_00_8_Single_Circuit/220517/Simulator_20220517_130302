@@ -1,0 +1,282 @@
+{
+  "identity": {
+    "first": "Kelly",
+    "last": "Pawlak",
+    "title": "Quantum Applications Engineer",
+    "organization": "ColdQuanta",
+    "org_id": "05b07ed5-c04b-4e73-826b-c3b285467c3d",
+    "project": "Test_0_00_8_Single_Circuit",
+    "project_id": "f5d875a3-b02a-4a97-a24c-81c39b507190",
+    "giturl": "https://gitlab.com/coldquanta/coldquanta-applications-team/qexp"
+  },
+  "parameters": {
+    "shots": 16,
+    "coupling": "[[0, 1], [0, 2], [2, 3], [1, 3], [1, 0], [2, 0], [3, 2], [3, 1]]",
+    "optimization": 0,
+    "device": "Simulator"
+  },
+  "runs": [
+    {
+      "circuit": {
+        "circuit_data": "[(Instruction(name='GR(1.57, -1.57)', num_qubits=4, num_clbits=0, params=[]), [Qubit(QuantumRegister(4, 'q'), 0), Qubit(QuantumRegister(4, 'q'), 1), Qubit(QuantumRegister(4, 'q'), 2), Qubit(QuantumRegister(4, 'q'), 3)], []), (Instruction(name='rz', num_qubits=1, num_clbits=0, params=[1.5707963267948966]), [Qubit(QuantumRegister(4, 'q'), 1)], []), (Instruction(name='GR(-1.57, -1.57)', num_qubits=4, num_clbits=0, params=[]), [Qubit(QuantumRegister(4, 'q'), 0), Qubit(QuantumRegister(4, 'q'), 1), Qubit(QuantumRegister(4, 'q'), 2), Qubit(QuantumRegister(4, 'q'), 3)], []), (Instruction(name='measure', num_qubits=1, num_clbits=1, params=[]), [Qubit(QuantumRegister(4, 'q'), 0)], [Clbit(ClassicalRegister(4, 'c'), 0)]), (Instruction(name='measure', num_qubits=1, num_clbits=1, params=[]), [Qubit(QuantumRegister(4, 'q'), 1)], [Clbit(ClassicalRegister(4, 'c'), 1)])]",
+        "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\ngate r(param0,param1) q0 { u3(-pi/2,-pi,pi) q0; }\ngate gate_GR__1_57___1_57_ q0,q1,q2,q3 { r(-pi/2,-pi/2) q0; r(-pi/2,-pi/2) q1; r(-pi/2,-pi/2) q2; r(-pi/2,-pi/2) q3; }\ngate r(param0,param1) q0 { u3(pi/2,-pi,pi) q0; }\ngate gate_GR_1_57___1_57_ q0,q1,q2,q3 { r(pi/2,-pi/2) q0; r(pi/2,-pi/2) q1; r(pi/2,-pi/2) q2; r(pi/2,-pi/2) q3; }\ngate gate_GR_1_57___1_57_ q0,q1,q2,q3 { gate_GR_1_57___1_57_ q0,q1,q2,q3; }\ngate gate_GR__1_57___1_57_ q0,q1,q2,q3 { gate_GR__1_57___1_57_ q0,q1,q2,q3; }\nqreg q[4];\ncreg c[4];\ngate_GR_1_57___1_57_ q[0],q[1],q[2],q[3];\nrz(pi/2) q[1];\ngate_GR__1_57___1_57_ q[0],q[1],q[2],q[3];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\n"
+      },
+      "output": {
+        "run time": "20220517_130303",
+        "run duration": 0.621748,
+        "counts": {
+          "0010": 10,
+          "0000": 6
+        }
+      },
+      "errors": [],
+      "machinestatus": {
+        "available": true,
+        "operations": {
+          "idle": [
+            {
+              "qubit_id": 0,
+              "t1_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              },
+              "t2_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 1,
+              "t1_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              },
+              "t2_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 2,
+              "t1_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              },
+              "t2_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 3,
+              "t1_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              },
+              "t2_s": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            }
+          ],
+          "spam": [
+            {
+              "qubit_id": 0,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 1,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 2,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 3,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            }
+          ],
+          "gr": [
+            {
+              "qubit_id": 0,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 1,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 2,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 3,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            }
+          ],
+          "rz": [
+            {
+              "qubit_id": 0,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 1,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 2,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_id": 3,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            }
+          ],
+          "cz": [
+            {
+              "qubit_a_id": 0,
+              "qubit_b_id": 1,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_a_id": 1,
+              "qubit_b_id": 3,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_a_id": 3,
+              "qubit_b_id": 2,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            },
+            {
+              "qubit_a_id": 2,
+              "qubit_b_id": 0,
+              "fidelity": {
+                "value": 1.0,
+                "lower_sigma": 1.0,
+                "upper_sigma": 1.0,
+                "time_recorded": 1651336725.752852
+              }
+            }
+          ]
+        },
+        "max_shots": 2048,
+        "max_gates": 1024
+      },
+      "exports": {
+        "z1": 3.141592653589793,
+        "x1": 1.5707963267948966
+      },
+      "jobdata": {
+        "_job_id": "2fca711d-cbac-42b6-9e07-8f837025c4c6",
+        "_backend": "<serialized_blob>",
+        "metadata": {},
+        "job_input_data": [
+          {
+            "job_input": "<serialized_blob>",
+            "header": "<serialized_blob>"
+          }
+        ],
+        "backend_jobs": {
+          "35637f6e-d1d5-4787-8626-9c00ffa93693": {
+            "job_input": "<serialized_blob>",
+            "header": "<serialized_blob>"
+          }
+        },
+        "qobj_id": "b30fd994-deac-4785-8ecf-4adc5453f1a5"
+      }
+    }
+  ]
+}

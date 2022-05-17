@@ -26,28 +26,32 @@ function importRun(location) {
 
 function data_viz(data_list,location) {
   'use strict'
-
-
- 
-
-
   var counts_dic=data_list['runs']['0']['output']["counts"]
-  var count_array=Object.keys(counts_dic).map((key) => [key, counts_dic[key]])
+
   var plotdata =[]
+  var axisdata=[]
   for (var i=0;i<Object.keys(data_list['runs']).length;i++){
+    axisdata=removeDuplicates(axisdata.concat(Object.keys(data_list['runs'][i]['output']["counts"])))
+  }
+
+  for (var i=0;i<Object.keys(data_list['runs']).length;i++){
+    var thisdata=[]
+    for (var v=0;v<axisdata.length;v++){
+      thisdata[v]=data_list['runs'][i]['output']["counts"][axisdata[v]]
+    }
     plotdata[i]=
       {
-        data: arrayColumn(Object.keys(data_list['runs'][i]['output']["counts"]).map((key) => [key, counts_dic[key]]),1),
+        data: thisdata,
+        label: "Run "+ i,
         lineTension: 0,
         backgroundColor: ColorList[i%ColorList.length],
         borderColor: '#007bff',
         borderWidth: 0,
         pointBackgroundColor: '#007bff'
-      }
-    
+      }   
   }
 
-  console.log(plotdata)
+  
 
 
   // Graphs
@@ -58,7 +62,6 @@ function data_viz(data_list,location) {
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: arrayColumn(count_array,0),
       datasets: 
         plotdata   
     
@@ -139,7 +142,7 @@ function data_dump(data_list,location){
 
 
 
- mop=data_list['runs']['0']['machine_status']['operations']
+ mop=data_list['runs'][0]['machinestatus']['operations']
  machine_table=document.createElement('table')
  dataholder.appendChild(machine_table)
  machine_table.classList.add('table')
@@ -175,13 +178,14 @@ function data_dump(data_list,location){
   
  locpeices=location.split("/")
  console.log(locpeices)
+ console.log(`<img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}.png' width="100%"></img>`)
  dataholder.innerHTML+=
  `
  <h2> Circuit Image </h2>
  <div class="container m-5 p-5">
  <div class="card text-center">
  <center>
- <img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}.png' width="100%"></img>
+ <img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}/_0.png' width="100%"></img>
  </center>
  
  </div>
@@ -236,7 +240,10 @@ function syntaxHighlight(json) {
 
 
 
-
+function removeDuplicates(arr) {
+  return arr.filter((item,
+      index) => arr.indexOf(item) === index);
+}
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
