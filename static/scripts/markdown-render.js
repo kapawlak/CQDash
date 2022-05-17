@@ -58,7 +58,7 @@ function includeHTML(filenum = linkfile) {
             if (this.readyState == 4) {
                 if (this.status == 200) { z.innerHTML =  doRendering(this.responseText);  processstyles()}
                 if (this.status == 404) { z.innerHTML = `
-                <h1 id='part0'>This lab is not available yet!</h1><br> 
+                <h1 id='part0'>This page does not exist.</h1><br> 
                 <center> If you believe this is a mistake, try a hard refresh with Ctrl + Shift +R </center>`; }
 
                 /*remove the attribute, and call this function once more:*/
