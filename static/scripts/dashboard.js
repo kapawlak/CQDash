@@ -62,6 +62,7 @@ function data_viz(data_list,location) {
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
+      labels:axisdata,
       datasets: 
         plotdata   
     
@@ -128,7 +129,7 @@ function data_dump(data_list,location){
               <b>Identity</b> 
             </div>
             <ul class="list-group list-group-flush center">
-              <li class="list-group-item">Person: ${data_list['identity']['person']}, ${data_list['identity']['title']}</li>
+              <li class="list-group-item">Person: ${data_list['identity']['first']} ${data_list['identity']['last']}, ${data_list['identity']['title']}</li>
               <li class="list-group-item">Organization: ${data_list['identity']['organization']}</li>
               <li class="list-group-item">project git: ${data_list['identity']['giturl']} </li>
               

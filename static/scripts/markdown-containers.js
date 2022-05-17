@@ -65,10 +65,11 @@ class Card{
         this.styleList.push(narrow_center, 'my-2')
         this.innerStyles[1]='text-center'
         break
-      case 'Exercise':
+      case 'Instruction':
         this.collapse=false
-        this.headerText=`Exercise ${this.number}`
+        this.headerText=``
         this.styleList.push(narrow_center, 'my-2')
+        this.collapse=true
         break
       case 'Equation':
         this.footerText= `Equation ${this.number}`
@@ -112,7 +113,7 @@ class Card{
         break
       case 'Activity':
         this.collapse=true
-        this.headerText= `<div class= ' container-fluid row justify-content-start'> <div class='col-lg-12'> <strong>Activity ${this.number} </strong></div>`
+        this.headerText= `<div class= ' container-fluid row justify-content-start'> <div class='col-lg-12'> <strong>Activity  </strong></div>`
         this.styleList.push('col-lg-11 my-5 mx-auto')
         this.innerStyles[0]+=collapsable_header
         break
@@ -268,17 +269,17 @@ md.use(container, 'Quiz', {
   }
 })
 
-///EXERCISE///
-md.use(container, 'Exercise', {
+///Instruction///
+md.use(container, 'Instruction', {
   // Input Format is: 
-  // Exercise (reference-name)
+  // Instruction (reference-name)
   render: function (tokens, idx) {
     let args;
     if (tokens[idx].nesting === 1) {
-      args = strip(tokens[idx].info.trim().match(/^Exercise(.*)$/)[1])
+      args = strip(tokens[idx].info.trim().match(/^Instruction(.*)$/)[1])
 
-      let ex = new Card('Exercise', args[0])
-      ex.footerText+=  args[1] ? ` ${args[1]} ` : ''
+      let ex = new Card('Instruction', args[0])
+      ex.headerText+=  args[1] ? ` ${args[1]} ` : ''
       ex.styleList
       ex.innerStyles[3]+=' py-0'
       ex.styleList.push(' ' + args[2])
@@ -454,7 +455,7 @@ md.use(container, 'Hider', {
 
 
 
-///ACTIVITY
+///Activity
 md.use(container, 'Activity', {
   // Input Format is: 
   // Activity (optional-ref|optional-title)
@@ -462,10 +463,10 @@ md.use(container, 'Activity', {
     let args
     if (tokens[idx].nesting === 1) {
       args = strip(tokens[idx].info.trim().match(/^Activity(.*)$/)[1])
-      let activity = new Card('Activity', args[0])
-      activity.headerText+= args[1] ?  `<div class='col-lg-12 text-left justify-content-start' > <span class='lead align-baseline' style="padding-left:0px"> ${args[1]} </span></div>` : ''
-      activity.headerText+='</div>'
-      activity.publishCard()
+      let Activity = new Card('Activity', args[0])
+      Activity.headerText+= args[1] ?  `<div class='col-lg-12 text-left justify-content-start' > <span class='lead align-baseline' style="padding-left:0px"> ${args[1]} </span></div>` : ''
+      Activity.headerText+='</div>'
+      Activity.publishCard()
       return div_head.pop()
     } else {
       return div_foot.pop()
@@ -890,23 +891,23 @@ md.use(container, 'Summary', {
        
     
         <div class='row g-0'>
-        <div class='col-3 text-center badge-Exercise container fs-3 text-white'>
-          <span class='badge badge-Exercise fs-1 text-white'> ${Counter["Exercise"].length} </span> <br> Exercises
+        <div class='col-3 text-center badge-Instruction container fs-3 text-white'>
+          <span class='badge badge-Instruction fs-1 text-white'> ${Counter["Instruction"].length} </span> <br> Instructions
           </div> `
        
       string+=`
         <div class='col-9 '>
           <ul class="list-inline px-1 py-0 mb-3 " >`
  
-        Counter["Exercise"].forEach((e)=> {
+        Counter["Instruction"].forEach((e)=> {
           string += `<li class="list-inline-item align-middle py-1">
               <a 
                 tabindex="0"  
                 href="#${e[1]}"
                 role="button" 
-                class="btn btn-sm badge-Exercise position-relative mats text-white"  
+                class="btn btn-sm badge-Instruction position-relative mats text-white"  
                 aria-pressed="false" autocomplete="off">
-                Exercise ${e[0]}
+                Instruction ${e[0]}
               </a>
             </li>`
           })

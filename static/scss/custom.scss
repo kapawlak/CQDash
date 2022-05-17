@@ -20,11 +20,13 @@ $CQ-lightgray: #DCE1E5;
 $caution:tint-color($CQ-orange,70%);
 
 
+
+
 $light : tint-color($CQ-lightgray,80%);
 $dark: black;
 $component-active-bg: $CQ-aqua;
 
-
+$pre-color : $dark;
 
 $input-btn-focus-width: 0.1rem;
 $card-cap-bg:                       rgba(black, .15) !default;
@@ -114,6 +116,7 @@ pre {
 
 code{
     background-color: $CQ-lightgray;
+    color: $dark;
     word-wrap: break-word;
 }
 
@@ -233,7 +236,7 @@ $figure-bg: tint-color($CQ-sandstone,95%);
 $hider-bg:  $CQ-moss;
 $Activity-bg: shade-color(tint-color($CQ-coral,20%),30%);
 $eqn-bg: tint-color($dark,85%);
-$Exercise-header-bg:shade-color($CQ-seagreen,10%);
+$Instruction-header-bg:shade-color($CQ-seagreen,10%);
 $intro-bg: $dark;
 $simulation-bg:$CQ-mist;
 
@@ -495,16 +498,21 @@ $simulation-bg:$CQ-mist;
 
 }
 
-///Exercise
+///Instruction
 
 
-.Exercise{
+.Instruction{
     text-align: center;
-    .card-header{
-        background-color: $Exercise-header-bg;
-        color:white;
-        border:0;
-    }
+
+    > .accordion-item >  button{
+        border: 0px solid black;
+        width: 100%;
+        background-color:$dark;
+        box-shadow: none!important;
+        border-radius: 0.25rem!important;
+        color: white;
+        };
+   
 
     ol, ul{
         text-align: left;
@@ -532,7 +540,7 @@ $simulation-bg:$CQ-mist;
 
 }
 
-.Exercise.prelab{
+.Instruction.prelab{
     .card-header{
         background-color: $danger;
         color:white;
@@ -540,12 +548,12 @@ $simulation-bg:$CQ-mist;
     }
 }
 
-.badge-Exercise{
-    background-color: $Exercise-header-bg;
+.badge-Instruction{
+    background-color: $Instruction-header-bg;
     font-size: 1.3rem;
 }
-.badge-Exercise:hover{
-    background-color: tint-color($Exercise-header-bg,20%);
+.badge-Instruction:hover{
+    background-color: tint-color($Instruction-header-bg,20%);
 
 }
 //Video
@@ -613,12 +621,14 @@ $simulation-bg:$CQ-mist;
 }
 ///Figure//////////////////////////////
  .Figure{
-    background-color: $figure-bg;
-    color:$dark;
+    background-color: rgba($white, .3);
+    color:$light;
     text-align: center;
     justify-content: center;
     max-width: 95%;
-    
+    .card-footer{
+        background-color: rgba($dark, .9);
+    }
 
     img{
         max-width: 100%;
@@ -915,6 +925,9 @@ overflow-x: hidden;
     background-color: $CQ-orange;
     border: 0px white solid;
 }
+
+
+
 .Quiz {
     a{
     width: 100%;
@@ -943,3 +956,4 @@ overflow-x: hidden;
 .pronoun{
     font-size: 0.7em;
 }
+
