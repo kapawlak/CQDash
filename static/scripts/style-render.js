@@ -36,7 +36,11 @@ function processstyles(){
   })  
   modal_img()
   replace_tags()
-  tableOfContents('[data-toc]', '[data-content]')
+  if (linkfile == "home"){
+    importDirData()
+  }else{
+    tableOfContents('[data-toc]', '[data-content]')
+  }
     
   table_list=document.querySelectorAll('.Table table')
 
@@ -103,8 +107,8 @@ function replace_tags() {
     var buts = document.getElementsByClassName('mats')
     for(i=0; i<buts.length;i++){
       buts[i].onclick= function(){
-        this.classList.toggle('btn-UCSB-navy')
-        this.classList.toggle('btn-UCSB-gold')
+        this.classList.toggle('btn-CQ-navy')
+        this.classList.toggle('btn-CQ-orange')
         this.querySelector('span').classList.remove('bg-danger')
         this.querySelector('span').classList.add('bg-secondary')
       }

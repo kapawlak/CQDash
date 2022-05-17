@@ -767,7 +767,7 @@ function contacts(kind) {
         <div id ="Contact${kind}" class="accordion accordion-flush card col-card Contact col-md-8 my-3 p-0" >
           <div class="accordion-item"> 
             <span class="my-0 accordion-header">
-              <button class="accordion-button collapsed bg-UCSB-navy text-UCSB-gold" type="button" data-bs-toggle="collapse" data-bs-target="#Contact-${kind}" aria-expanded="false" aria-controls="Contact-${kind}">
+              <button class="accordion-button collapsed bg-CQ-navy text-CQ-orange" type="button" data-bs-toggle="collapse" data-bs-target="#Contact-${kind}" aria-expanded="false" aria-controls="Contact-${kind}">
                <div class="card-but"> Contact ${kind} of this Course</div>
               </button>
             </span>
@@ -779,7 +779,7 @@ function contacts(kind) {
       sectionhours=''
       officehours=''
       room=''
-    if (kind == "Faculty") {
+    if (kind == "Management") {
       role = ` <li class="list-inline-item "><strong>Role:</strong> ${e["title"]} </li>`
     }
     if(e["officehours"]!='' && e["officehours"]!=  null){
@@ -808,7 +808,7 @@ function contacts(kind) {
         <div class="card-body">
           <span class="card-title">${e["first-name"] + ' ' + e["last-name"]}
           <small class='text-muted'>${e["pronouns"]}</small>
-                  <small class="badge bg-UCSB-navy address">${e["email"].replace('@','&commat;')}</small>
+                  <small class="badge bg-CQ-navy address">${e["email"].replace('@','&commat;')}</small>
           </span>
           <ul class="list-inline p-0 m-0 ">
           
@@ -930,7 +930,7 @@ function materials(args) {
   let obj, deet
 
   let list = `
-     <ul class="list-inline Materials px-1 py-0 mb-3 " style='border-top: 1px solid var(--bs-UCSB-lightgray); border-bottom: 1px solid var(--bs-UCSB-lightgray)'>
+     <ul class="list-inline Materials px-1 py-0 mb-3 " style='border-top: 1px solid var(--bs-CQ-lightgray); border-bottom: 1px solid var(--bs-CQ-lightgray)'>
       <li class="list-inline-item align-middle">
         <span class=' fs-5' >
           Materials: 
@@ -939,7 +939,7 @@ function materials(args) {
       `
   args.forEach((e) => {obj = e.split('---')[0]; deet = e.split('---').slice(1).join(' ');
     list += `<li class="list-inline-item align-middle py-1">
-              <a tabindex="0"  role="button" class="btn btn-sm btn-UCSB-navy position-relative mats" 
+              <a tabindex="0"  role="button" class="btn btn-sm btn-CQ-navy position-relative mats" 
                 ${deet ? 'data-bs-placement="bottom"  data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="' + deet + '"' : ''} 
                 aria-pressed="false" autocomplete="off">
                 ${obj} 
@@ -967,7 +967,7 @@ function quizzy(args,ref) {
     katex_map.set(katex_key, deet)
     // console.log(obj, deet)
     inner += `<li class="list-group-item align-middle py-1 ">
-              <a tabindex="0"  role="button" class="btn btn-UCSB-navy position-relative quizlet" 
+              <a tabindex="0"  role="button" class="btn btn-CQ-navy position-relative quizlet" 
                 id= '${ref}_ans_${i}'
                 aria-pressed="false" autocomplete="off" data-modify="${ref}_answer" data-result="${deet}">
                 ${obj} 

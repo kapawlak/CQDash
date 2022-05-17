@@ -30,19 +30,18 @@ let sitedata
 ///Start by just printing out json file.
 function init_nav(linkfile) {
   let lab_list = document.getElementById('lab_list')
-  let TA_list = document.getElementById('TA_list')
+  let TeamList = document.getElementById('Team')
   fetch("config.json?v=" + Math.floor(Math.random() * 100000))
     .then(response => {
       return response.json();
     })
-    .then(data => stash(data));
-  function stash(data) {
+    .then(data => sTeamh(data));
+  function sTeamh(data) {
     sitedata = data
     includeHTML(linkfile)
 
 
-    document.getElementById('CourseTitle').innerHTML = 'UCSB ' + sitedata['Course-info']['name'];
-    document.getElementById('chatframe').setAttribute('src', sitedata['integrations'][0]['file'])
+    document.getElementById('datasourcelabel').innerHTML = "<img height='30px' src='static/assets/img/CQSym.png' ></img>" + sitedata['Course-info']['name'];
 
 
     for (i = 0; i < sitedata['page-links'].length; i++) {
@@ -55,76 +54,73 @@ function init_nav(linkfile) {
             <li><a class="dropdown-item" href="?linkfile=home"><i class="bi bi-house-fill"></i> Home</a></li>`
     //TA List Stuff
 
-    TA_list.innerHTML +=
+    TeamList.innerHTML +=
 
       `
       <li>
       <hr class="p-0 m-0" >
             </li>
-      <li class="text-center lead bg-UCSB-navy text-white"> 
-      <b>TAs</b> 
+      <li class="text-center lead bg-dark text-white"> 
+      <b>Apps Team</b> 
       </li> 
       <li ><hr class="p-0 m-0" ></li>`
-    for (i = 0; i < sitedata['TAs'].length; i++) {
-      var first_name = sitedata['TAs'][i]['first-name']
-      var last_name = sitedata['TAs'][i]['last-name']
-      var email = sitedata['TAs'][i]['email']
-      var room = sitedata['TAs'][i]['room']
+    for (i = 0; i < sitedata['Team'].length; i++) {
+      var first_name = sitedata['Team'][i]['first-name']
+      var last_name = sitedata['Team'][i]['last-name']
+      var title=sitedata['Team'][i]['title']
+      var email = sitedata['Team'][i]['email']
+      var location = sitedata['Team'][i]['location']
 
-      TA_list.innerHTML += `<li >
+      TeamList.innerHTML += `<li >
               <div class="dropdown-item text-center py-1">
                 <div class="col-sm-12 nav-links lead">${first_name} ${last_name}</div>
-                <div class="row bg-UCSB-lightgray p-1">
+                <div class="row bg-CQ-lightgray p-1">
                 <a href="mailto:${email}" class="col"><i class="bi bi-envelope-fill px-1"></i></a>
                
                 <button type="button" class="btn col px-1 py-0" data-bs-toggle="modal" data-bs-target="#infoModal" 
                 data-name="${first_name + ' ' + last_name}" 
-                data-title="TA"
+                data-title="${title}"
                 data-email="${email}" 
-                data-room="${room}" 
-                data-oo="${sitedata['TAs'][i]['officehours']}" 
-                data-so="${sitedata['TAs'][i]['sectionhours']}"
-                data-img="${sitedata['TAs'][i]['img']}"
-                data-pronouns="${sitedata['TAs'][i]['pronouns']}"
+                data-location="${location}" 
+                data-img="${sitedata['Team'][i]['img']}"
+                data-pronouns="${sitedata['Team'][i]['pronouns']}"
                 ><i class="bi bi-info-circle text-primary"></i></button>
                 </div>
               </div>
             </li>`
 
     }
-    TA_list.innerHTML +=
+    TeamList.innerHTML +=
       `<li>
             <hr class="p-0 m-0" >
           </li>
-            <li class="text-center lead bg-UCSB-navy text-UCSB-gold"> 
-      <b>Instructors</b>
+            <li class="text-center lead bg-dark text-CQ-orange"> 
+      <b>Leadership</b>
       </li> 
             <li>
             <hr class="p-0 m-0" >
             </li>`
 
-    for (i = 0; i < sitedata['Faculty'].length; i++) {
-      var first_name = sitedata['Faculty'][i]['first-name']
-      var last_name = sitedata['Faculty'][i]['last-name']
-      var title = sitedata['Faculty'][i]['title']
-      var email = sitedata['Faculty'][i]['email']
-      var room = sitedata['Faculty'][i]['room']
+    for (i = 0; i < sitedata['Management'].length; i++) {
+      var first_name = sitedata['Management'][i]['first-name']
+      var last_name = sitedata['Management'][i]['last-name']
+      var title = sitedata['Management'][i]['title']
+      var email = sitedata['Management'][i]['email']
+      var location = sitedata['Management'][i]['location']
 
-      TA_list.innerHTML += `<li>
+      TeamList.innerHTML += `<li>
         <div class="dropdown-item text-center">
         <div class="col-sm-12 nav-links lead">${first_name} ${last_name}</div>
-        <div class="row bg-UCSB-lightgray p-1">
+        <div class="row bg-CQ-lightgray p-1">
         <a href="mailto:${email}" class="col"><i class="bi bi-envelope-fill px-1"></i></a>
         
         <button type="button" class="btn col px-1 py-0" data-bs-toggle="modal" data-bs-target="#infoModal" 
                 data-name="${first_name + ' ' + last_name}" 
                 data-title= "${title}"
                 data-email="${email}" 
-                data-room="${room}" 
-                data-oo="${sitedata['Faculty'][i]['officehours']}" 
-                data-so="${sitedata['Faculty'][i]['sectionhours']}"
-                data-img="${sitedata['Faculty'][i]['img']}"
-                data-pronouns="${sitedata['Faculty'][i]['pronouns']}"
+                data-location="${location}" 
+                data-img="${sitedata['Management'][i]['img']}"
+                data-pronouns="${sitedata['Management'][i]['pronouns']}"
                 ><i class="bi bi-info-circle text-primary"></i></button>
               </div>
             </li>`
@@ -154,7 +150,7 @@ infoModal.addEventListener('show.bs.modal', function (event) {
   var modalTitle = infoModal.querySelector('.modal-title')
   var modalBodyInput = infoModal.querySelector('.modal-body')
 
-  modalTitle.innerHTML = `Contact <span class='text-UCSB-seagreen'>${recipient}</span>`
+  modalTitle.innerHTML = `Contact <span class='text-CQ-seagreen'>${recipient}</span>`
 
   modalBodyInput.innerHTML = ''
   let color
@@ -174,10 +170,11 @@ infoModal.addEventListener('show.bs.modal', function (event) {
 
   modalBodyInput.innerHTML +=
     `<strong>${recipient}</strong> 
-  <span class="badge bg-${color}">${button.getAttribute('data-title')}</span>
-  <br>
-  <small class=text-muted>${button.getAttribute('data-pronouns')}</small>
-  <hr>`
+    <br>
+    <small class="text-muted pronoun">${button.getAttribute('data-pronouns')}</small>
+    <br>
+   <span class="badge bg-${color}" style="font-size: 12pt">${button.getAttribute('data-title')}</span>
+   <hr>`
 
   if (button.getAttribute('data-email') != 'undefined') {
     modalBodyInput.innerHTML += `
@@ -185,27 +182,14 @@ infoModal.addEventListener('show.bs.modal', function (event) {
   <a href="mailto:${button.getAttribute('data-email')}">${button.getAttribute('data-email')}</a>
   <br><hr>
   `}
-  if (button.getAttribute('data-room') != '' && button.getAttribute('data-room') != 'undefined' && button.getAttribute('data-room') != null) {
+  if (button.getAttribute('data-location') != '' && button.getAttribute('data-location') != 'undefined' && button.getAttribute('data-location') != null) {
     modalBodyInput.innerHTML += `
     
-  <b>Office Hours Room:</b> <br><hr>
-  ${button.getAttribute('data-room')}
-  <hr>
-  `}
-  if (button.getAttribute('data-oo') != 'undefined' && button.getAttribute('data-oo') != '') {
-    modalBodyInput.innerHTML += `
-  <b>Office Hours:</b><br> 
-  ${button.getAttribute('data-oo')}
-  <br> 
-  <hr>
-  `}
+  <b>Location:</b> <br>
+  ${button.getAttribute('data-location')}
 
-  if (button.getAttribute('data-so') != 'undefined' && button.getAttribute('data-so') != '') {
-    modalBodyInput.innerHTML += `
-  <b>Section Hours:</b> <br>
-  ${button.getAttribute('data-so')}
-  `
-  }
+  `}
+  
 })
 
 var imgModal = document.getElementById('imgModal')

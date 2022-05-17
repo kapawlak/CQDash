@@ -32,10 +32,11 @@ const css_links = [
         'https://fonts.googleapis.com/css?family=Roboto', //fonts
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', //fonts
         'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css', //fonts
-        '../../../static/assets/webfont.css',//UCSB web standards font
-        '../../../static/css/katex.min.css', //Katex styles
-        '../../../static/css/custom.css', //Custom Sass compiled CSS sheet for manual environments
-        '../../../static/css/dashboard.css' // Another Custom CSS sheet that should get moved directly into custom.css eventually
+        'static/css/katex.min.css', //Katex styles
+        'static/css/custom.css', //Custom Sass compiled CSS sheet for manual environments
+        'static/css/dashboard.css', // Another Custom CSS sheet that should get moved directly into custom.css eventually
+        'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap'
+
 ]
 
 

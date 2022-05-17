@@ -1,47 +1,28 @@
 // Custom.scss
 // Option B: Include parts of Bootstrap
-.avenir-light {
-    font-family: Avenir, "Century Gothic", sans-serif; 
-    font-weight:100; 
-    font-style:normal;
-  }
-  
-  .avenir-black-oblique {
-    font-family:Avenir, "Century Gothic", sans-serif; 
-    font-weight:600; 
-    font-style:italic; 
-  }
-  
-  .produkt-thin {
-    font-family:Produkt, serif; 
-    font-weight:100; 
-    font-style:normal;
-  }
 
-  $font-weight-bolder:          800 ;
-  $lead-font-weight:            100;
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
 
 
-$UCSB-navy: #003660;
-$UCSB-gold: #FEBC11;
-$UCSB-aqua: #04859B;
-$UCSB-moss: #7A8D39;
-$UCSB-seagreen: #0BA89A;
-$UCSB-coral: #EF5645;
-$UCSB-mist: #9CBEBE;
-$UCSB-clay: #DCD6CC;
-$UCSB-sandstone: #C9BF9D;
-$UCSB-lightgray: #DCE1E5;
-$caution:tint-color($UCSB-gold,70%);
+$CQ-blue: #3399FF;
+$CQ-orange: #FF9933;
+$CQ-aqua: #04859B;
+$CQ-moss: #7A8D39;
+$CQ-seagreen: #0BA89A;
+$CQ-coral: #EF5645;
+$CQ-mist: #9CBEBE;
+$CQ-clay: #DCD6CC;
+$CQ-sandstone: #C9BF9D;
+$CQ-lightgray: #DCE1E5;
+$caution:tint-color($CQ-orange,70%);
 
 
-$light : tint-color($UCSB-lightgray,80%);
-$dark: shade-color($UCSB-navy,60%);
-$component-active-bg: $UCSB-aqua;
+$light : tint-color($CQ-lightgray,80%);
+$dark: black;
+$component-active-bg: $CQ-aqua;
 
 
 
@@ -50,18 +31,18 @@ $card-cap-bg:                       rgba(black, .15) !default;
 
 
 $custom-colors: (
-  "UCSB-navy": #003660,
-  "UCSB-gold": #FEBC11,
-  "UCSB-aqua": #04859B,
-  "UCSB-moss": #7A8D39,
-  "UCSB-seagreen": #0BA89A,
-  "UCSB-coral": #EF5645,
-  "UCSB-mist": #9CBEBE,
-  "UCSB-clay": #DCD6CC,
-  "UCSB-sandstone": #C9BF9D,
-  "UCSB-lightgray": #DCE1E5,
+  "CQ-blue": #3399FF,
+  "CQ-orange": #FF9933,
+  "CQ-aqua": #04859B,
+  "CQ-moss": #7A8D39,
+  "CQ-seagreen": #0BA89A,
+  "CQ-coral": #EF5645,
+  "CQ-mist": #9CBEBE,
+  "CQ-clay": #DCD6CC,
+  "CQ-sandstone": #C9BF9D,
+  "CQ-lightgray": #DCE1E5,
   "black": black,
-  "caution": tint-color($UCSB-gold,70%)
+  "caution": tint-color($CQ-orange,70%)
 );
 
 $utilities: (
@@ -79,7 +60,7 @@ $utilities: (
 
 // SPACER
 
-$dropdown-divider-margin-y:         1px ;
+$dropdown-divider-margin-y:         0px ;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../bootstrap/scss/variables";
@@ -87,8 +68,8 @@ $dropdown-divider-margin-y:         1px ;
  
 
 
-$font-family-sans-serif:      "Avenir", Roboto , -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-monospace:       "Produkt", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-sans-serif:      "Titilium", Roboto , -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace:       "Montserrat", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-weight-base:            280;
 
 
@@ -109,7 +90,7 @@ $accordion-button-padding-x:              $accordion-padding-x;
 $accordion-button-color:                  $accordion-color;
 $accordion-button-bg:                     $accordion-bg;
 $accordion-transition:                    $btn-transition, border-radius .15s ease;
-$accordion-button-active-bg:              $UCSB-lightgray;
+$accordion-button-active-bg:              $CQ-lightgray;
 $accordion-button-active-color:           shade-color($primary, 10%);
 
 $accordion-button-focus-border-color:     $input-focus-border-color;
@@ -126,13 +107,13 @@ pre {
     border: $accordion-border-color $border-width solid;
     
     margin: auto;
-    background-color: $UCSB-lightgray;
+    background-color: $CQ-lightgray;
     padding: 5px;
     white-space: pre-wrap; 
   };
 
 code{
-    background-color: $UCSB-lightgray;
+    background-color: $CQ-lightgray;
     word-wrap: break-word;
 }
 
@@ -148,7 +129,7 @@ $card-border-width: 0px;
         font-weight: 500;
         font-size: 1.3rem;
     }
-    box-shadow: 1px 1px 5px 2px $UCSB-lightgray;
+    box-shadow: 1px 1px 5px 2px $CQ-lightgray;
     .katex{
         font-size: 1.3rem
     }
@@ -189,14 +170,14 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 
 .ac-top, .ac-top:focus, .ac-top:active{
-    background-color: $UCSB-navy;
+    background-color: $dark;
     color: $light;
     
 }
 
 .ac-top:not(.collapsed){
     background-color: $dark;
-    //color: $UCSB-gold;
+    //color: $CQ-orange;
     color:white;
 }
 
@@ -207,7 +188,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 .ac-heads{
     font-size: 1.1rem;  
-    background-color: tint-color($UCSB-lightgray,10%); 
+    background-color: tint-color($CQ-lightgray,10%); 
     
     span{
         color:$dark
@@ -224,11 +205,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     background-color: white;
     border-bottom: 1px solid $light ;
     font-size: smaller;
-    background-color: tint-color($UCSB-lightgray,50%);
+    background-color: tint-color($CQ-lightgray,50%);
 
 }
 .ac-min:hover{
-    background-color: shade-color(tint-color($UCSB-gold,90%),10%);
+    background-color: shade-color(tint-color($CQ-orange,90%),10%);
     border-bottom: 1px solid $light ;
 
 }
@@ -237,7 +218,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     padding-left: 1px;
 }
 .ac-list > a:hover{
-    background-color: shade-color(tint-color($UCSB-gold,90%),5%)!important;
+    background-color: shade-color(tint-color($CQ-orange,90%),5%)!important;
 }
 
 
@@ -245,16 +226,16 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 /////////////////////////////////////////////////////////////////// 
 //CONTAINERS
 
-$materials-bg: shade-color($UCSB-mist,5%);
-$definition-bg: tint-color($UCSB-navy,95%);
-$figure-bg: tint-color($UCSB-sandstone,95%);
+$materials-bg: shade-color($CQ-mist,5%);
+$definition-bg: tint-color($dark,95%);
+$figure-bg: tint-color($CQ-sandstone,95%);
 
-$hider-bg:  $UCSB-moss;
-$Activity-bg: shade-color(tint-color($UCSB-coral,20%),30%);
-$eqn-bg: tint-color($UCSB-navy,85%);
-$Exercise-header-bg:shade-color($UCSB-seagreen,10%);
-$intro-bg: $UCSB-navy;
-$simulation-bg:$UCSB-mist;
+$hider-bg:  $CQ-moss;
+$Activity-bg: shade-color(tint-color($CQ-coral,20%),30%);
+$eqn-bg: tint-color($dark,85%);
+$Exercise-header-bg:shade-color($CQ-seagreen,10%);
+$intro-bg: $dark;
+$simulation-bg:$CQ-mist;
 
 
 //def
@@ -264,7 +245,7 @@ $simulation-bg:$UCSB-mist;
 
 ///Intro/////////////////////////////
 .Intro{
-    background-color: tint-color($intro-bg,80%);
+    background-color: white;
     color:$dark;
     font-size: 1.2rem!important;
 
@@ -319,7 +300,7 @@ $simulation-bg:$UCSB-mist;
     };
 
     .card-header{
-        background-color: tint-color($UCSB-gold,50%);
+        background-color: tint-color($CQ-orange,50%);
     }
     .card-body{
         font-size: 1rem
@@ -546,7 +527,7 @@ $simulation-bg:$UCSB-mist;
 
     .card-footer{
         font-size: 0.9rem;
-        background-color: $UCSB-lightgray;
+        background-color: $CQ-lightgray;
     }
 
 }
@@ -570,12 +551,12 @@ $simulation-bg:$UCSB-mist;
 //Video
 .Video {
 
-    background-color: tint-color($UCSB-navy,50%);
+    background-color: tint-color($dark,50%);
     border:0px solid black;
     border-radius:$border-radius!important;
     
     .card-footer, .card-header{
-        background-color: $UCSB-navy;
+        background-color: $dark;
         color:white;
     }
 
@@ -593,7 +574,7 @@ $simulation-bg:$UCSB-mist;
     // transform:rotate(2deg);
     // font-family: 'Comic Sans Ms', "Comic Sans", cursive;
     font-size: 1rem;
-    color: shade-color($UCSB-lightgray,70%);
+    color: shade-color($CQ-lightgray,70%);
     text-indent: 0.25rem;
     // i{
     //     transform:rotate(45deg) translateY(-40px) ;
@@ -931,7 +912,7 @@ overflow-x: hidden;
 
 
 .Quiz a:focus{
-    background-color: $UCSB-gold;
+    background-color: $CQ-orange;
     border: 0px white solid;
 }
 .Quiz {
@@ -943,7 +924,7 @@ overflow-x: hidden;
     }
  
     .card-header{
-        background-color: $UCSB-sandstone;
+        background-color: $CQ-sandstone;
 
             text-align: center!important;
        
@@ -955,3 +936,10 @@ overflow-x: hidden;
 
 .katex { font-size: 105%; }
  
+
+
+
+
+.pronoun{
+    font-size: 0.7em;
+}

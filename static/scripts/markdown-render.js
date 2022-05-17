@@ -48,10 +48,7 @@ function includeHTML(filenum = linkfile) {
     /*loop through a collection of all HTML elements:*/
     z = document.getElementById("maincontent");
 
-    if(filenum == 'FAQ'){
-        filenum = '../Common/'+filenum
-    }
-    file =  filenum + ".md" + '?v=' + rand
+    file =  "static/pages/"+filenum + ".md" + '?v=' + rand
 
 
     if (file) {

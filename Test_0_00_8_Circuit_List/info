@@ -1,0 +1,8 @@
+{
+  "name": "Test 0.00.8 Circuit List",
+  "filename": "Test_0_00_8_Circuit_List",
+  "description": "This project is to test the new circuit pipeline for passing lists of circuits",
+  "giturl": "https://gitlab.com/coldquanta/coldquanta-applications-team/qexp",
+  "pr_id": "f5d875a3-b02a-4a97-a24c-81c39b507190",
+  "typ": "internal"
+}

@@ -32,7 +32,7 @@ SOFTWARE.
       console.log("pressed")
     })
   })()
-document.getElementById('copyright').innerHTML=`©(2020-${new Date().getFullYear()}) UCSB ILG, Design by Kelly Ann Pawlak`
+//document.getElementById('copyright').innerHTML=`©(2020-${new Date().getFullYear()}) UCSB ILG, Design by Kelly Ann Pawlak`
 
   //Function that determines the page to display based on URL Variable.
   const queryString = window.location.search;
@@ -50,25 +50,9 @@ document.getElementById('copyright').innerHTML=`©(2020-${new Date().getFullYear
     }
   }
 }
-  function appresize(){
-    document.getElementById('chatframe').height=(window.innerHeight-document.getElementById('chatframe').getBoundingClientRect().y) -10 +'px'
-  }
-  appresize()
 
-  window.onresize=appresize
 
-  init_nav(linkfile)
+
+init_nav(linkfile)
 
   
-  window.onload = function (){
-    
-    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        if (window.location.hash && isChrome) {
-            setTimeout(function () {
-                var hash = window.location.hash;
-                window.location.hash = "";
-                window.location.hash = hash;
-                document.getElementById(hash).focus()
-            }, 300);
-          }
-        }
