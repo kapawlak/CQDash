@@ -47,6 +47,7 @@ function data_viz(data_list,location) {
     
   }
 
+  console.log(plotdata)
 
 
   // Graphs
@@ -138,7 +139,7 @@ function data_dump(data_list,location){
 
 
 
- mop=data_list['run']['0']['machine_status']['operations']
+ mop=data_list['runs']['0']['machine_status']['operations']
  machine_table=document.createElement('table')
  dataholder.appendChild(machine_table)
  machine_table.classList.add('table')
