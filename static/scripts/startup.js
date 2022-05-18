@@ -31,7 +31,7 @@ let x = document.cookie;
 
 console.log(Date.now())
 
-if (parseInt(x.split('=')[1])<latest_release){
+if (x==''| parseInt(x.split('=')[1])<latest_release ){
   window.alert(`Hi there! Your qexp package is out of date. Please run the following command to update:
   \n pip install git+https://gitlab.com/coldquanta/coldquanta-applications-team/qexp.git'`)}
 
