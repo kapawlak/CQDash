@@ -32,7 +32,7 @@ function navBar(data_dir) {
     var opened = false
     for (var proj in datas) {
         var proj_dir = datas[proj];
-        if (proj.includes('.') != true && proj != 'index') {
+        if (proj.includes('.') != true && proj != 'index' && proj != 'pages') {
             accordion_container = ac_item()
             navbar.appendChild(accordion_container)       // Create top level accordion container
             project_node = levelone(proj, opened)
