@@ -24,7 +24,7 @@ var tableOfContents = function (content, target, options) {
 	for (i = 0; i < headers.length; i++) {
 		elmnt = headers[i];
 		if (i > 0) {
-			elmnt.innerHTML = "Part " + romanize(i) + ": " + elmnt.innerHTML
+			elmnt.innerHTML = elmnt.innerHTML
 		}
 		elmnt.id = "part" + i;
 	}
