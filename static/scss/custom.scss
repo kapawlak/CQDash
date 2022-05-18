@@ -549,8 +549,10 @@ $header-font-family: $font-family-sans-serif;
 
     p{
         margin-bottom: 0!important;
-        font-family: onsolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
-        font-weight: $font-weight-base;
+        font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+        font-weight: thin!important;
+        font-size: smaller!important;
+        color:rgba($dark, .9);
     }
 
    
