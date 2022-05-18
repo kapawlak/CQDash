@@ -543,8 +543,9 @@ $header-font-family: $font-family-sans-serif;
     
 
     .card-body{
-        padding:0!important;
+        padding:0.5rem!important;
         border-radius:$border-radius!important;
+        overflow-x: scroll;
     }
 
     p{
@@ -553,11 +554,12 @@ $header-font-family: $font-family-sans-serif;
         font-weight: thin!important;
         font-size: smaller!important;
         color:rgba($dark, .9);
-        padding: 0.5rem;
         white-space: pre;
+        padding: 0 0.3rem 0 0.3rem; 
+        
     }
 
-   
+    
 }
 
 //Note
@@ -906,4 +908,9 @@ overflow-x: hidden;
 
 body:not(.nav-link){
     font-family: $font-family-monospace;
+}
+
+
+.hljs{
+    background-color: $white!important;
 }

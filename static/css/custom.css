@@ -11046,16 +11046,17 @@ textarea.form-control-lg {
   background-color: #fff;
   border: 0px solid black; }
   .Code .card-body {
-    padding: 0 !important;
-    border-radius: 0.25rem !important; }
+    padding: 0.5rem !important;
+    border-radius: 0.25rem !important;
+    overflow-x: scroll; }
   .Code p {
     margin-bottom: 0 !important;
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
     font-weight: thin !important;
     font-size: smaller !important;
     color: rgba(0, 0, 0, 0.9);
-    padding: 0.5rem;
-    white-space: pre; }
+    white-space: pre;
+    padding: 0 0.3rem 0 0.3rem; }
 
 .Note {
   font-size: 1rem;
@@ -11284,5 +11285,8 @@ img:hover {
 
 body:not(.nav-link) {
   font-family: "Montserrat", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+.hljs {
+  background-color: #fff !important; }
 
 /*# sourceMappingURL=custom.css.map */
