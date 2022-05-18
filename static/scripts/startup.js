@@ -24,6 +24,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+
+latest_release=1652917451320
+
+let x = document.cookie;
+
+console.log(Date.now())
+
+if (parseInt(x.split('=')[1])<latest_release){
+  window.alert(`Hi there! Your qexp package is out of date. Please run the following command to update:
+  \n pip install git+https://gitlab.com/coldquanta/coldquanta-applications-team/qexp.git'`)}
+
+
+document.cookie='lastvisit='+ Date.now();
+
+
+//document.cookie='lastvisit='+Date.now()
+
   //Make Sidebar Functional
   (function () {
     'use strict'
