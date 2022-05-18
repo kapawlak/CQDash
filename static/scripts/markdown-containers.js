@@ -80,8 +80,8 @@ class Card{
         this.styleList.push(fig_group)
         break
       case 'Code':
-        this.styleList.push('col-lg-8', 'mx-auto', 'my-3')
-        this.innerStyles[1]+='mt-5'
+        this.styleList.push('col-lg-10', 'mx-auto', 'my-3', 'px-0')
+        this.innerStyles[1]+=' mt-5, mx-0, px-0 '
         break
       case 'Note':
         this.styleList.push('mx-auto', 'my-4', 'col-8 bg-gradient')

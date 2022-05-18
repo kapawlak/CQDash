@@ -553,6 +553,8 @@ $header-font-family: $font-family-sans-serif;
         font-weight: thin!important;
         font-size: smaller!important;
         color:rgba($dark, .9);
+        padding: 0.5rem;
+        white-space: pre;
     }
 
    
@@ -579,6 +581,7 @@ $header-font-family: $font-family-sans-serif;
     }
     p{
         margin: 0px;
+
     }
 
     ol > li, ul >li{

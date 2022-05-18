@@ -11053,7 +11053,9 @@ textarea.form-control-lg {
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
     font-weight: thin !important;
     font-size: smaller !important;
-    color: rgba(0, 0, 0, 0.9); }
+    color: rgba(0, 0, 0, 0.9);
+    padding: 0.5rem;
+    white-space: pre; }
 
 .Note {
   font-size: 1rem;

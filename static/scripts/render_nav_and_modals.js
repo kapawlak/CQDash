@@ -41,7 +41,7 @@ function init_nav(linkfile) {
     includeHTML(linkfile)
 
 
-    document.getElementById('datasourcelabel').innerHTML = `<img height='30px' src='${ABSOLUTE_LOCATION}static/assets/img/CQSym.png' class='px-2'></img> `+ sitedata['Course-info']['name'];
+    document.getElementById('datasourcelabel').innerHTML = `<img height='30px' src='${ABSOLUTE_LOCATION}static/assets/img/CQSym.png' class='px-2'></img>  ${sitedata['Course-info']['name']}`;
 
 
     for (i = 0; i < sitedata['page-links'].length; i++) {

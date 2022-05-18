@@ -59,7 +59,10 @@ function processstyles(){
       trigger: 'focus'
     }) })
 
-  
+    document.querySelectorAll('.Code p').forEach(el => {
+      // then highlight each
+      hljs.highlightElement(el);
+    });
     
 }
 
@@ -84,8 +87,12 @@ function replace_tags() {
       <a tabindex="0" class=" text-primary p-0 m-0 align-top" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="$2" style='text-indent:0px;'><i class="bi bi-question-square-fill"></i></a>`)
       t.innerHTML = popper
       
+      tabs=t.innerHTML.replaceAll('!!!T!!!','      ')
+      t.innerHTML=tabs
+
       quick_math(t)
-        
+      
+      
       
     })
     
