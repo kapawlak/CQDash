@@ -106,6 +106,7 @@ $accordion-icon-transform:                rotate(-180deg);
 
 $card-border-radius:                        0px!important;
 $card-inner-border-radius:                  0px!important;
+$card-cap-padding-y:            0;
 
 
 
@@ -609,13 +610,14 @@ $header-font-family: $font-family-sans-serif;
 ///Figure//////////////////////////////
  .Figure{
     background-color: rgba($white, .3);
-    color:$light;
+    
     text-align: center;
     justify-content: center;
     max-width: 95%;
     .card-footer{
         background-color: rgba($dark, .9);
         font-family: $font-family-sans-serif;
+        color:$light;
     }
 
     img{

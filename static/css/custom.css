@@ -5436,7 +5436,7 @@ textarea.form-control-lg {
   margin-left: 1rem; }
 
 .card-header {
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.15);
   border-bottom: 0px solid rgba(0, 0, 0, 0.125); }
@@ -5444,7 +5444,7 @@ textarea.form-control-lg {
     border-radius: 0px !important 0px !important 0 0; }
 
 .card-footer {
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   background-color: rgba(0, 0, 0, 0.15);
   border-top: 0px solid rgba(0, 0, 0, 0.125); }
   .card-footer:last-child {
@@ -5452,7 +5452,7 @@ textarea.form-control-lg {
 
 .card-header-tabs {
   margin-right: -0.5rem;
-  margin-bottom: -0.5rem;
+  margin-bottom: 0;
   margin-left: -0.5rem;
   border-bottom: 0; }
 
@@ -11084,13 +11084,13 @@ textarea.form-control-lg {
 
 .Figure {
   background-color: rgba(255, 255, 255, 0.3);
-  color: #f8f9fa;
   text-align: center;
   justify-content: center;
   max-width: 95%; }
   .Figure .card-footer {
     background-color: rgba(0, 0, 0, 0.9);
-    font-family: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+    font-family: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #f8f9fa; }
   .Figure img {
     max-width: 100%; }
   .Figure ul, .Figure ol {
