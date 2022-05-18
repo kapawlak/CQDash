@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "clone pkg pages"
+cp -r ~/Documents/qexp/qexp/templates/pages/ ~/Documents/CQDash/

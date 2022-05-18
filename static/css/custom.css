@@ -43,7 +43,7 @@ code {
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: black;
-  --bs-font-sans-serif: "Titilium", Roboto, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-sans-serif: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: "Montserrat", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); }
 
@@ -60,7 +60,7 @@ body {
   margin: 0;
   font-family: var(--bs-font-sans-serif);
   font-size: 1rem;
-  font-weight: 280;
+  font-weight: 380;
   line-height: 1.5;
   color: #212529;
   background-color: #fff;
@@ -211,7 +211,7 @@ pre {
 
 code {
   font-size: 0.875em;
-  color: #d63384;
+  color: #000;
   word-wrap: break-word; }
   a > code {
     color: inherit; }
@@ -1571,7 +1571,7 @@ progress {
   --bs-CQ-lightgray: #DCE1E5;
   --bs-black: black;
   --bs-caution: #ffe0c2;
-  --bs-font-sans-serif: "Titilium", Roboto, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-sans-serif: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: "Montserrat", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); }
 
@@ -1588,7 +1588,7 @@ body {
   margin: 0;
   font-family: var(--bs-font-sans-serif);
   font-size: 1rem;
-  font-weight: 280;
+  font-weight: 380;
   line-height: 1.5;
   color: #212529;
   background-color: #fff;
@@ -1739,7 +1739,7 @@ pre {
 
 code {
   font-size: 0.875em;
-  color: #d63384;
+  color: #000;
   word-wrap: break-word; }
   a > code {
     color: inherit; }
@@ -5397,7 +5397,7 @@ textarea.form-control-lg {
   background-color: #fff;
   background-clip: border-box;
   border: 0px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem; }
+  border-radius: 0 !important; }
   .card > hr {
     margin-right: 0;
     margin-left: 0; }
@@ -5406,12 +5406,12 @@ textarea.form-control-lg {
     border-bottom: inherit; }
     .card > .list-group:first-child {
       border-top-width: 0;
-      border-top-left-radius: calc(0.25rem - 1px);
-      border-top-right-radius: calc(0.25rem - 1px); }
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important; }
     .card > .list-group:last-child {
       border-bottom-width: 0;
-      border-bottom-right-radius: calc(0.25rem - 1px);
-      border-bottom-left-radius: calc(0.25rem - 1px); }
+      border-bottom-right-radius: 0 !important;
+      border-bottom-left-radius: 0 !important; }
   .card > .card-header + .list-group,
   .card > .list-group + .card-footer {
     border-top: 0; }
@@ -5441,14 +5441,14 @@ textarea.form-control-lg {
   background-color: rgba(0, 0, 0, 0.15);
   border-bottom: 0px solid rgba(0, 0, 0, 0.125); }
   .card-header:first-child {
-    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }
+    border-radius: 0px !important 0px !important 0 0; }
 
 .card-footer {
   padding: 0.5rem 1rem;
   background-color: rgba(0, 0, 0, 0.15);
   border-top: 0px solid rgba(0, 0, 0, 0.125); }
   .card-footer:last-child {
-    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); }
+    border-radius: 0 0 0px !important 0px !important; }
 
 .card-header-tabs {
   margin-right: -0.5rem;
@@ -5467,7 +5467,7 @@ textarea.form-control-lg {
   bottom: 0;
   left: 0;
   padding: 1rem;
-  border-radius: calc(0.25rem - 1px); }
+  border-radius: 0 !important; }
 
 .card-img,
 .card-img-top,
@@ -5476,13 +5476,13 @@ textarea.form-control-lg {
 
 .card-img,
 .card-img-top {
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px); }
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important; }
 
 .card-img,
 .card-img-bottom {
-  border-bottom-right-radius: calc(0.25rem - 1px);
-  border-bottom-left-radius: calc(0.25rem - 1px); }
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important; }
 
 .card-group > .card {
   margin-bottom: 0.75rem; }
@@ -10875,24 +10875,16 @@ textarea.form-control-lg {
     text-align: left; }
   .Intro > .card-header {
     color: white;
-    background-color: black; }
+    background-color: rgba(0, 0, 0, 0.85);
+    font-family: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 
 .Summary {
-  background-color: #cccccc; }
+  background-color: rgba(215, 215, 215, 0.97); }
   .Summary > .card-header {
     color: white;
-    background-color: black; }
+    background-color: rgba(0, 0, 0, 0.85); }
   .Summary ol > li, .Summary ul > li {
     text-align: left; }
-
-.Materials {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: black; }
-  .Materials ul {
-    font-size: 90%; }
-  .Materials > .card-header {
-    color: black;
-    background-color: #94b5b5; }
 
 .Definition {
   background-color: #f2f2f2;
@@ -10907,15 +10899,6 @@ textarea.form-control-lg {
     font-size: 1rem; }
   .Definition .katex {
     font-size: 1.15rem; }
-
-.Prelab {
-  background-color: #f8f9fa;
-  color: black; }
-  .Prelab ul {
-    font-size: 90%; }
-  .Prelab .card-header {
-    background-color: #cc2929;
-    color: white; }
 
 .Hider button {
   border: 0px solid black;
@@ -11101,7 +11084,8 @@ textarea.form-control-lg {
   justify-content: center;
   max-width: 95%; }
   .Figure .card-footer {
-    background-color: rgba(0, 0, 0, 0.8); }
+    background-color: rgba(0, 0, 0, 0.9);
+    font-family: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
   .Figure img {
     max-width: 100%; }
   .Figure ul, .Figure ol {
@@ -11168,7 +11152,7 @@ h1, .h1, h2, .h2 {
   max-width: 100%; }
 
 #part0 {
-  font-family: "Produkt", var(--bs-font-monospace);
+  font-family: "Titillium Web", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1em;
   font-weight: 400;
   direction: ltr;
@@ -11189,37 +11173,6 @@ h5 > button, .h5 > button {
 img:hover {
   cursor: pointer; }
 
-.hshaker {
-  animation: hshake 1.82s cubic-bezier(0.16, 0.17, 0.19, 0.37) both;
-  animation-iteration-count: infinite; }
-
-.hshaker:hover {
-  animation-iteration-count: 0; }
-
-@keyframes hshake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0); }
-  20%, 80% {
-    transform: translate3d(1px, 0, 0); }
-  30%, 50%, 70% {
-    transform: translate3d(-2px, 0, 0); }
-  40%, 60% {
-    transform: translate3d(1px, 0, 0); } }
-.rotor {
-  animation: rotor 0.82s  both;
-  animation-iteration-count: infinite; }
-
-@keyframes rotor {
-  0% {
-    transform: rotate(0deg); }
-  80% {
-    transform: rotate(0deg); }
-  85% {
-    transform: rotate(25deg); }
-  95% {
-    transform: rotate(-25deg); }
-  100% {
-    transform: rotate(0deg); } }
 /* Tooltip container */
 .mytooltip {
   position: static;
@@ -11324,5 +11277,8 @@ img:hover {
 
 .pronoun {
   font-size: 0.7em; }
+
+body:not(.nav-link) {
+  font-family: "Montserrat", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 /*# sourceMappingURL=custom.css.map */
