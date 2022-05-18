@@ -36,7 +36,7 @@ function processstyles(){
   })  
   modal_img()
   replace_tags()
-  if (linkfile == "home"){
+  if (linkfile == "Home"){
     importDirData()
   }else{
     tableOfContents('[data-toc]', '[data-content]')

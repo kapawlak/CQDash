@@ -30,7 +30,7 @@
       {
         "first-name": "Denny",
         "last-name": "Dahl",
-        "pronouns": "(He/Him/His)",
+        "pronouns": "c",
         "email": "denny.dahl@coldquanta.com",
         "location": "Los Alamos, NM",     
         "img": "static/people/photo/dennydahl.jpeg",
@@ -39,7 +39,7 @@
       {
         "first-name": "Paul",
         "last-name": "Lipman",
-        "pronouns": "(She/Her/Hers)",
+        "pronouns": "(He/Him/His)",
         "email": "ppopescu@physics.ucsb.edu ",
         "location": "Bay Area, CA",     
         "title":"President of Quantum",

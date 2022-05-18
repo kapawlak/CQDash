@@ -39,7 +39,7 @@ SOFTWARE.
   const urlParams = new URLSearchParams(queryString);
   var linkfile = urlParams.get('linkfile')
   if (linkfile == null) {
-    linkfile = 'home'
+    linkfile = 'Home'
   }
 
   function sleep(milliseconds) {
