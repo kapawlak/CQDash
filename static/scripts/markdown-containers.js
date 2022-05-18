@@ -79,10 +79,9 @@ class Card{
         this.footerText= 'Figure ' + this.number
         this.styleList.push(fig_group)
         break
-      case 'Video':
-        this.styleList.push('col-lg-8', 'mx-auto', 'my-4')
-        this.innerStyles[1]+=' ratio ratio-16x9'
-        this.footerText= `Video ${this.number}`
+      case 'Code':
+        this.styleList.push('col-lg-8', 'mx-auto', 'my-3')
+        this.innerStyles[1]+='mt-5'
         break
       case 'Note':
         this.styleList.push('mx-auto', 'my-4', 'col-8 bg-gradient')
@@ -310,17 +309,16 @@ md.use(container, 'Equation', {
   }
 })
 
-///VIDEO
-md.use(container, 'Video', {
+///Code
+md.use(container, 'Code', {
 // Input Format is: 
-// Video (reference-name| optional-header)
+// Code (reference-name| optional-header)
   render: function (tokens, idx) {
     let args;
     if (tokens[idx].nesting === 1) {
-      args = strip(tokens[idx].info.trim().match(/^Video(.*)$/)[1])
-      let vid= new Card("Video", args[0])
-      vid.footerText+=( args[1]? ': ' + args[1] : '')
-      vid.publishCard()
+      args = strip(tokens[idx].info.trim().match(/^Code(.*)$/)[1])
+      let code= new Card("Code", args[0])
+      code.publishCard()
 
       return div_head.pop()
     } else {

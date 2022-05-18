@@ -534,21 +534,23 @@ $header-font-family: $font-family-sans-serif;
     background-color: tint-color($Instruction-header-bg,20%);
 
 }
-//Video
-.Video {
+//Code
+.Code {
 
-    background-color: tint-color($dark,50%);
+    background-color: $white;
     border:0px solid black;
-    border-radius:$border-radius!important;
+
     
-    .card-footer, .card-header{
-        background-color: $dark;
-        color:white;
-    }
 
     .card-body{
         padding:0!important;
         border-radius:$border-radius!important;
+    }
+
+    p{
+        margin-bottom: 0!important;
+        font-family: onsolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+        font-weight: $font-weight-base;
     }
 
    

@@ -11042,16 +11042,16 @@ textarea.form-control-lg {
 .badge-Instruction:hover {
   background-color: #3baca2; }
 
-.Video {
-  background-color: gray;
-  border: 0px solid black;
-  border-radius: 0.25rem !important; }
-  .Video .card-footer, .Video .card-header {
-    background-color: black;
-    color: white; }
-  .Video .card-body {
+.Code {
+  background-color: #fff;
+  border: 0px solid black; }
+  .Code .card-body {
     padding: 0 !important;
     border-radius: 0.25rem !important; }
+  .Code p {
+    margin-bottom: 0 !important;
+    font-family: onsolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+    font-weight: 380; }
 
 .Note {
   font-size: 1rem;
