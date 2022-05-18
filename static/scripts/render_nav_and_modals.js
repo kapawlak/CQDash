@@ -31,12 +31,12 @@ let sitedata
 function init_nav(linkfile) {
   let lab_list = document.getElementById('lab_list')
   let TeamList = document.getElementById('Team')
-  fetch(ABSOLUTE_LOCATION+"static/config.json?v=" + Math.floor(Math.random() * 100000))
+  fetch("pages/etc/config.json?v=" + Math.floor(Math.random() * 100000))
     .then(response => {
       return response.json();
     })
-    .then(data => sTeamh(data));
-  function sTeamh(data) {
+    .then(data => stash(data));
+  function stash(data) {
     sitedata = data
     includeHTML(linkfile)
 
