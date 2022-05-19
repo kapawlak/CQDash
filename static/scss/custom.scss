@@ -106,7 +106,8 @@ $accordion-icon-transform:                rotate(-180deg);
 
 $card-border-radius:                        0px!important;
 $card-inner-border-radius:                  0px!important;
-$card-cap-padding-y:            0;
+$card-cap-padding-y:                        0;
+$card-border-width:                         0px;
 
 
 
@@ -131,7 +132,7 @@ code{
     }
 }
 
-$card-border-width: 0px;
+
 .card{
     .card-header,.card-footer{
         font-weight: 500;
@@ -156,7 +157,6 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // 5. Add additional custom code here
 @import "../bootstrap/scss/bootstrap";
-
 
 
 

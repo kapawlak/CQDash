@@ -25,19 +25,38 @@ SOFTWARE.
 */
 
 
-latest_release=1652917451320
 
-let x = document.cookie;
-
-console.log(Date.now())
-
-if (x==''| parseInt(x.split('=')[1])<latest_release ){
-  window.alert(`Hi there! Your qexp package is out of date. Please run the following command to update:
-  \n pip install git+https://gitlab.com/coldquanta/coldquanta-applications-team/qexp.git'`)}
+latest_version='0.1.3'
 
 
-document.cookie='lastvisit='+ Date.now();
+if (VERSION == null||VERSION == 0){
+    AlertUpdate();
+  }else {
+    
+    LV=latest_version.split('.')
+    V=VERSION.split('.')
+    console.log(LV,V)
+    if(parseInt(LV[0])>parseInt(V[0])){
+      AlertUpdate()
+    }else if(parseInt(LV[1])>parseInt(V[1])){
+      AlertUpdate()
+    }else if(parseInt(LV[2])>parseInt(V[2])){
+      AlertUpdate()
+    }
+  }
 
+
+
+
+function AlertUpdate(){
+
+update=document.getElementsByClassName('navbar-nav')[0]
+var updatenotify=document.createElement('li')
+updatenotify.classList.add('nav-link')
+updatenotify.innerHTML= `<b><a href='https://gitlab.com/coldquanta/coldquanta-applications-team/qexp'> New qexp released! Click to update</a></b>
+`
+update.insertBefore(updatenotify,update.firstChild)
+}
 
 //document.cookie='lastvisit='+Date.now()
 

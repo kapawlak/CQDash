@@ -92,7 +92,9 @@ h1:not(#part0)~ul{
     padding-left: 360px !important;
    
   }
-
+  .navbar-nav{
+  margin-left: -360px;
+  }
 
 }
 
