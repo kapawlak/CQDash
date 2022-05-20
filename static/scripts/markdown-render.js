@@ -29,7 +29,7 @@ document.querySelector('meta[name="author"]').setAttribute("content", "Website a
 
 //Load markdown it and container plugin
 var md = window.markdownit()
-md.set({ html: true, javascript: true })
+md.set({ html: true, javascript: true, code:false })
 var container = window.markdownitContainer;
 
 //Rendererfunc
