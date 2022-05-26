@@ -26,7 +26,7 @@ SOFTWARE.
 
 
 
-latest_version='0.1.6'
+latest_version='0.1.7'
 
 
 if (VERSION == null||VERSION == 0){
