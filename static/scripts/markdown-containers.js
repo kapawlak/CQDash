@@ -213,17 +213,17 @@ function classAcc(c) {
 
 //////////////// CUSTOM CONTAINER DEFS
 
-///MATERIALS////
-md.use(container, 'Materials', {
+///Full////
+md.use(container, 'Full', {
 // Input Format is: 
-// Materials (item 1 --- note 1|item 2 --- note 2|...)
+// Full (item 1 --- note 1|item 2 --- note 2|...)
   render: function (tokens, idx) {
     let args
     if (tokens[idx].nesting === 1) {
-      args = strip(tokens[idx].info.trim().match(/^Materials(.*)$/)[1]) //identifies the text that is not "Materials", and identifies arguments seperated by a | 
-      return materials(args)
+      args = strip(tokens[idx].info.trim().match(/^Full(.*)$/)[1]) //identifies the text that is not "Full", and identifies arguments seperated by a | 
+      return full(args)
     } else {
-      return '</ul></span> '
+      return ''
     }
   }
 })
@@ -237,7 +237,7 @@ md.use(container, 'Intro', {
       args = strip(tokens[idx].info.trim().match(/^Intro(.*)$/)[1])
       let intro=new Card("Intro", args[0].replace(/[^a-zA-Z0-9]/g,''))
       intro.headerText=args[0]
-      intro.footerText=(args.slice(1).length ? materials(args.slice(1)) : null)
+      intro.footerText=(args.slice(1).length ? Full(args.slice(1)) : null)
       intro.publishCard()
       return div_head.pop()
     } else {
@@ -925,27 +925,21 @@ md.use(container, 'Summary', {
 
 
 
-function materials(args) {
+function full(args) {
   let obj, deet
 
   let list = `
-     <ul class="list-inline Materials px-1 py-0 mb-3 " style='border-top: 1px solid var(--bs-CQ-lightgray); border-bottom: 1px solid var(--bs-CQ-lightgray)'>
+     <ul class="list-inline Full px-1 py-0 mb-3 " ; border-bottom: 1px solid var(--bs-CQ-lightgray)'>
       <li class="list-inline-item align-middle">
-        <span class=' fs-5' >
-          Materials: 
-        </span>
+
       </li>  
       `
-  args.forEach((e) => {obj = e.split('---')[0]; deet = e.split('---').slice(1).join(' ');
+  args.forEach((e) => {title = e.split('---')[0]; url = e.split('---').slice(1).join(' ');
     list += `<li class="list-inline-item align-middle py-1">
-              <a tabindex="0"  role="button" class="btn btn-sm btn-CQ-navy position-relative mats" 
-                ${deet ? 'data-bs-placement="bottom"  data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="' + deet + '"' : ''} 
-                aria-pressed="false" autocomplete="off">
-                ${obj} 
-                ${deet ? '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">Click for Info</span></span>' : ''}
-              </a>
+            <a class="btn btn-primary" href="${url}" role="button">${title}</a>
             </li>`
   })
+  list+=`</ul>`
   return list;
 
 }
