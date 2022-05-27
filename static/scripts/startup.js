@@ -29,21 +29,19 @@ SOFTWARE.
 latest_version='0.1.8'
 
 
-if (VERSION == null||VERSION == 0){
-    AlertUpdate();
-  }else {
-    
-    LV=latest_version.split('.')
-    V=VERSION.split('.')
-    console.log(LV,V)
-    if(parseInt(LV[0])>parseInt(V[0])){
-      AlertUpdate()
-    }else if(parseInt(LV[1])>parseInt(V[1])){
-      AlertUpdate()
-    }else if(parseInt(LV[2])>parseInt(V[2])){
-      AlertUpdate()
-    }
+if (VERSION == null || VERSION == 0) {
+  AlertUpdate();
+} else {
+
+  LV = latest_version.split('.').map(Number)
+  V = VERSION.split('.').map(Number)
+  BaseArray=[10000,100,1]
+  dot = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
+  console.log(LV, V)
+  if(dot(LV,BaseArray)>dot(V,BaseArray)){
+    AlertUpdate()
   }
+}
 
 
 
