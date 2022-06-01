@@ -10,3 +10,7 @@ Test_0_00_8_Single_Circuit
 Test_0_00_8_Circuit_List
 Test
 pages
+Project_1_Single_Qubit_Gates
+Project_2_Transpilation
+Test_List
+Test_Transpile

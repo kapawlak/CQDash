@@ -31,9 +31,15 @@ function data_viz(data_list,location) {
   var plotdata =[]
   var axisdata=[]
   for (var i=0;i<Object.keys(data_list['runs']).length;i++){
-    axisdata=removeDuplicates(axisdata.concat(Object.keys(data_list['runs'][i]['output']["counts"])))
+    var entry=data_list['runs'][i]['output']['counts']
+    if (typeof entry ==='string'){
+      axisdata=removeDuplicates(axisdata.concat(entry))
+    }else{
+      axisdata=removeDuplicates(axisdata.concat(Object.keys(data_list['runs'][i]['output']["counts"])))
+    }
   }
-
+    axisdata.sort()
+    
   for (var i=0;i<Object.keys(data_list['runs']).length;i++){
     var thisdata=[]
     for (var v=0;v<axisdata.length;v++){

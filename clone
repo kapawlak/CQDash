@@ -2,3 +2,6 @@
 
 echo "clone pkg pages"
 cp -r ~/Documents/qexp/qexp/templates/pages/ ~/Documents/CQDash/
+
+echo "clone pkg data"
+cp -r ~/Documents/qexp/examples/qexp_data/* ~/Documents/CQDash/
