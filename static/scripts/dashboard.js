@@ -1,77 +1,125 @@
 /* globals Chart:false, feather:false */
 const arrayColumn = (arr, n) => arr.map(x => x[n]);
-var current_chart
+
+//Globally track current chart, run instance so that it can be destroyed and redrawn
+var PAGESTATE={'run': 0};
+
+//Add a class to manage all the data from a single file.
+class RunData{
+  constructor(json_data){
+    this.data=json_data
+    console.log('All Data',this.data)
+    ///PLOTTING DATA
+    //Construct the axis data
+    this.axisdata=this.constructAxisData();
+
+    //Construct the sets of data
+    this.datasets= this.constructDataSets();
+    
+    //Construct plotdata
+    this.plotdata=this.constructPlotData()
+
+    //PRINTING DATA.
+    //Gather parameter data.
+    this.runs=this.data['runs']
+
+    
+
+  }
 
 
-function importRun(location) {
-  console.log(location)
-  preinfo=document.getElementById('preinfo')
-  if (preinfo!= null){
-      preinfo.remove()}
-  rundata = {}
-  fetch(location)
-    .then(response => {
-      return response.json();
-    })
-    .then(data => stash(data));
-  function stash(data) {
-    rundata = data
-    data_viz(rundata,location)
+  constructPlotData(){
+   return this.datasets.map((s,i)=> {return this.templatePlotData(s,i)})
+    
+  }
+
+  templatePlotData( dataset, label_index){
+   return  {
+        data: dataset,
+        label: "Run "+ label_index,
+        lineTension: 0,
+        backgroundColor: ColorList[label_index%ColorList.length],
+        borderColor: '#007bff',
+        borderWidth: 0,
+        pointBackgroundColor: '#007bff'
+      }  
+  }
+
+  constructDataSets() {
+    var data1 = Object.values(this.data['runs']).map(e => e['output']['counts']);
+    console.log('data1', data1)
+    var data2=data1.map(e => this.axisdata.map(a => e[a]));
+    console.log('data2', data2)
+    return data2
+  }
+
+  constructAxisData() {
+    var axisdata =[]
+    
+    Object.values(this.data['runs']).forEach((e) => {
+      var entry = e['output']['counts'];
+      if (typeof entry === 'string') {
+        axisdata = removeDuplicates(axisdata.concat(entry));
+      } else {
+        axisdata = removeDuplicates(axisdata.concat(Object.keys(entry)));
+      }
+    });
+    axisdata.sort();
+    return axisdata
+  }
+
+  averageRunData(){
+    return 'Hi'
   }
 
 }
 
+//Does some preprocessing on the field and highlights the links (Denny request) in the least efficient way possible
+function importRun(location) {
+
+  //Remove all highlighting of runs
+  var runs = document.getElementsByClassName('run')
+  for (var e = 0; e < runs.length; e++) {
+    runs[e].classList.remove('text-primary')
+  }
+  //Highlight the current run
+  document.getElementById(location).classList.add('text-primary')
+
+  //Destroy the text placeholder instructing user to chose data
+  const preinfo = document.getElementById('preinfo')
+  if (preinfo != null) {
+    preinfo.remove()
+  }
+
+  //initiate JSON fetch and synchronus callback
+  returnJSONdata(location, location, DataRendering)
+}
 
 
-
-function data_viz(data_list,location) {
+function DataRendering(location, data_list) {
   'use strict'
-  var counts_dic=data_list['runs']['0']['output']["counts"]
-
-  var plotdata =[]
-  var axisdata=[]
-  for (var i=0;i<Object.keys(data_list['runs']).length;i++){
-    var entry=data_list['runs'][i]['output']['counts']
-    if (typeof entry ==='string'){
-      axisdata=removeDuplicates(axisdata.concat(entry))
-    }else{
-      axisdata=removeDuplicates(axisdata.concat(Object.keys(data_list['runs'][i]['output']["counts"])))
-    }
-  }
-    axisdata.sort()
-    
-  for (var i=0;i<Object.keys(data_list['runs']).length;i++){
-    var thisdata=[]
-    for (var v=0;v<axisdata.length;v++){
-      thisdata[v]=data_list['runs'][i]['output']["counts"][axisdata[v]]
-    }
-    plotdata[i]=
-      {
-        data: thisdata,
-        label: "Run "+ i,
-        lineTension: 0,
-        backgroundColor: ColorList[i%ColorList.length],
-        borderColor: '#007bff',
-        borderWidth: 0,
-        pointBackgroundColor: '#007bff'
-      }   
-  }
-
-  
-
-
-  // Graphs
+  // Create run object and store
+  PAGESTATE['run-data']= new RunData(data_list)
   var ctx = document.getElementById('myChart')
-  if (current_chart){
-    current_chart.destroy()}
+
+  //Call chart drawer
+  DisplayChart(PAGESTATE['run-data'],ctx);
+
+  //Call data printer
+  DisplayData(location)
+}
+
+function DisplayChart(obj,ctx) {
+  //Remove existing chart to prevent draw conflict
+  if (PAGESTATE['chart']){
+    PAGESTATE['chart'].destroy()}
+  //Create and display new chart object
   // eslint-disable-next-line no-unused-vars
-  var myChart = new Chart(ctx, {
+  PAGESTATE['chart'] = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels:axisdata,
-      datasets: 
-        plotdata   
-    
+      labels: obj.axisdata,
+      datasets: obj.plotdata
     },
     options: {
       scales: {
@@ -85,127 +133,178 @@ function data_viz(data_list,location) {
         display: false
       }
     }
-  })
-  current_chart=myChart
+  });
 
-  data_dump(data_list,location)
 }
 
-function data_dump(data_list,location){
+
+
+
+function DisplayData(location){
 
   dataholder=document.getElementById('data-holder')
   dataholder.innerHTML=''
   
+  dataholder.appendChild(Object.assign(NewNode('h2'),{innerHTML:'Run Overview'}))
+  datadiv=dataholder.appendChild(NewNode('div',['container','m-0','p-0']))
+            .appendChild(NewNode('div',['row','align-items-start']))
+  //Append Time and Duration
+  datadiv.appendChild(NewNode('div',['col']))
+          .appendChild(DataCard('Outputs'))
+          .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
+          .append(
+            ListItem(["list-group-item"],` <div class="fw-bold">Run time:</div> ${PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['output']['run time']}`),
+            ListItem(["list-group-item"],` <div class="fw-bold">Run duration:</div> ${PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['output']['run duration']} seconds`))
+
+  //Append Parameters
+  datadiv.appendChild(NewNode('div',['col']))
+    .appendChild(DataCard('Parameters'))
+    .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
+    .append(
+      ListItem(["list-group-item"],` <div class="fw-bold">Shots:</div> ${PAGESTATE['run-data'].data['parameters']['shots']}`),
+      ListItem(["list-group-item"],` <div class="fw-bold">Coupling map:</div> ${PAGESTATE['run-data'].data['parameters']['coupling']}`),
+      ListItem(["list-group-item"],` <div class="fw-bold">Optimization:</div> ${PAGESTATE['run-data'].data['parameters']['optimization']}`))
+
+   //Append Identity
+   datadiv.appendChild(NewNode('div',['col']))
+   .appendChild(DataCard('Identity'))
+   .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
+   .append(
+     ListItem(["list-group-item"],` <div class="fw-bold">User:</div> ${PAGESTATE['run-data'].data['identity']['first']} ${PAGESTATE['run-data'].data['identity']['last']}, ${PAGESTATE['run-data'].data['identity']['title']}`),
+     ListItem(["list-group-item"],` <div class="fw-bold">Organization:</div> ${PAGESTATE['run-data'].data['identity']['organization']}`),
+     ListItem(["list-group-item"],` <div class="fw-bold">Git:</div> ${PAGESTATE['run-data'].data['identity']['giturl']} `),
+     ListItem(["list-group-item"],` <div class="fw-bold">Version:</div> ${PAGESTATE['run-data'].data['versions']['qiskit-coldquanta']}/${PAGESTATE['run-data'].data['versions']['qexp']}`)
+     )
 
 
-  oplist=['spam','gr', 'rz']
-  dataholder.innerHTML+=
-  `
-  <h2> Run overview </h2>
-  <div class="container m-0 p-0">
-  <div class="row align-items-start">
+///SPAM & Single Qubit Operations Table
+ let single_qubit_oplist=['spam','gr', 'rz']
+ let two_quibit_oplist=['cz']
+ let qubit_list=['Q1','Q2','Q3','Q4']
 
-  <div class="col">
-          <div class="card" style="width: 100%;">
-          <div class="card-header">
-            <b>Outputs</b> 
-          </div>
-          <ul class="list-group list-group-flush center">
-            <li class="list-group-item">Run time: ${data_list['runs'][0]['output']['run time']}</li>
-            <li class="list-group-item">Run duration: ${data_list['runs'][0]['output']['run duration']} seconds</li>
-            <li class="list-group-item">A third item</li>
-          </ul>
-          </div>
-    </div>
-    <div class="col">
-          <div class="card" style="width: 100%;">
-          <div class="card-header">
-            <b>Parameters</b> 
-          </div>
-          <ul class="list-group list-group-flush center">
-            <li class="list-group-item">Shots: ${data_list['parameters']['shots']}</li>
-            <li class="list-group-item">Coupling map: <br> ${data_list['parameters']['coupling']} </li>
-            <li class="list-group-item">Optimization: ${data_list['parameters']['optimization']}</li>
-          </ul>
-          </div>
-    </div>
-    <div class="col">
-            <div class="card" style="width: 100%;">
-            <div class="card-header">
-              <b>Identity</b> 
-            </div>
-            <ul class="list-group list-group-flush center">
-              <li class="list-group-item">Person: ${data_list['identity']['first']} ${data_list['identity']['last']}, ${data_list['identity']['title']}</li>
-              <li class="list-group-item">Organization: ${data_list['identity']['organization']}</li>
-              <li class="list-group-item">project git: ${data_list['identity']['giturl']} </li>
-              
-            </ul>
-            </div>
-    </div>
-  </div>
-  </div>
- 
-  `
+ let mop=PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['machinestatus']['operations']
+ let machine_table=dataholder.appendChild(DataCard('Single Qubit Gate and SPAM Fidelity'))
+                         .appendChild(NewNode('table',['table','table-bordered']))
+ let machine_body=NewNode('tbody')
+                         
+                         
+machine_table.appendChild(NewNode('thead'))
+.appendChild(NewNode('tr')).append(
+                          TableElement('th', 'col',['text-center'],'Quantity'),
+                          TableElement('th', 'col',['text-center'],'Q1'),
+                          TableElement('th', 'col',['text-center'],'Q2'),
+                          TableElement('th', 'col',['text-center'],'Q3'),
+                          TableElement('th', 'col',['text-center'],'Q4'))
+
+machine_table.appendChild(machine_body)
+//Create table qubit by qubit
+single_qubit_oplist.forEach((op)=>{
+  var row_data=NewNode('tr',['table-bordered'])
+  row_data.appendChild(TableElement('th','row',['text-center'], op))
+
+  qubit_list.forEach((q,i)=>{
+    row_data.appendChild(Object.assign(NewNode('td',['text-center']),{
+    innerHTML:
+      `<span title='${mop[op][i]["fidelity"]["value"]}'>${mop[op][i]["fidelity"]["value"].toFixed(3)} </span><br>
+      <small class="bs-lightgray" style="font-size:80%" title="${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)}">
+       (${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)}
+      </small> 
+      <small class="bs-lightgray" style="font-size:80%" title='${mop[op][i]["fidelity"]["lower_sigma"]}'>,
+       ${mop[op][i]["fidelity"]["lower_sigma"].toFixed(4)})
+      </small>`}))
+    })
+   machine_body.appendChild(row_data)
+ })
 
 
 
- mop=data_list['runs'][0]['machinestatus']['operations']
- machine_table=document.createElement('table')
- dataholder.appendChild(machine_table)
- machine_table.classList.add('table')
- machine_table.innerHTML=
- `
- <thead>
- <tr>
- <th scope="col">Quantity</th>
- <th scope="col">Q1</th>
- <th scope="col">Q2</th>
- <th scope="col">Q3</th>
- <th scope="col">Q4</th>
- </tr>
- </thead>
- `
-  machine_body=document.createElement('tbody')
-  machine_table.appendChild(machine_body)
 
- for (var quant in oplist){
-   row_data=`
-   <tr>
-   <th scope="row">${oplist[quant]}</th>`
-   for (let i= 0; i<4; i++){
-     console.log(quant,i)
-     row_data+=`<td> 
-       <b>${mop[oplist[quant]][i]["fidelity"]["value"]} </b><br>
-       (${mop[oplist[quant]][i]["fidelity"]["upper_sigma"]},
-       ${mop[oplist[quant]][i]["fidelity"]["lower_sigma"]})</td>`
-   }
-   row_data+='</tr>'
-   machine_table.innerHTML+=row_data
- }
-  
+
+///////Two Qubit Operations Table
+let entangle_table=dataholder.appendChild(DataCard('Entangling Gate Information'))
+                          .appendChild(NewNode('table',['table','table-bordered']))
+let entangle_body=NewNode('tbody');
+
+entangle_table.appendChild(NewNode('thead'))
+.appendChild(NewNode('tr')).append(
+            TableElement('th', 'col',['text-center'],''),
+            TableElement('th', 'col',['text-center'],'Q1'),
+            TableElement('th', 'col',['text-center'],'Q2'),
+            TableElement('th', 'col',['text-center'],'Q3'),
+            TableElement('th', 'col',['text-center'],'Q4'))
+
+
+entangle_table.appendChild(entangle_body);
+let cz_table=populateCZtable(mop)
+
+qubit_list.forEach((q1,i)=>{
+
+  var row_data=NewNode('tr',['table-bordered'])
+  row_data.appendChild(TableElement('th','row',['text-center'], q1))
+
+  qubit_list.forEach((q2,j) =>{
+    
+    var datacell= row_data.appendChild(NewNode('td',['text-center']))
+    if(i===j){
+      datacell.classList.add("bg-CQ-lightgray")
+    }else{
+      two_quibit_oplist.forEach((qq)=>{
+        
+        if(cz_table[i][j]==null){
+          datacell.classList.add("bg-CQ-lightgray")
+        }else
+            {
+            datacell.innerHTML+=
+              `<span title='${cz_table[i][j]["value"]}'>${cz_table[i][j]["value"].toFixed(3)} </span><br>
+              <small class="bs-lightgray" style="font-size:80%" title="${cz_table[i][j]["upper_sigma"].toFixed(4)}">
+                (${cz_table[i][j]["upper_sigma"].toFixed(4)}
+              </small> 
+              <small class="bs-lightgray" style="font-size:80%" title='${cz_table[i][j]["lower_sigma"]}'>,
+                ${cz_table[i][j]["lower_sigma"].toFixed(4)})
+              </small>`; 
+            }
+          }
+            )
+          }
+      })
+    entangle_body.appendChild(row_data)
+})
+entangle_table.appendChild(Object.assign(NewNode('div',[card-footer]),{innerHTML: "How we calculate two-qubit gate fidelities"}))
+
+
+
+ ///Circuit Image 
  locpeices=location.split("/")
- console.log(locpeices)
- console.log(`<img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}.png' width="100%"></img>`)
- dataholder.innerHTML+=
- `
- <h2> Circuit Image </h2>
- <div class="container m-5 p-5">
- <div class="card text-center">
- <center>
- <img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}/_0.png' width="100%"></img>
- </center>
+ dataholder.appendChild(DataCard('Circuit Image')).appendChild(Object.assign(NewNode('div','text-center'),{
+   innerHTML:`<img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}/_0.png' width="100%" title='Circuit'></img>`
+ }))
  
- </div>
- </div>
-
- `
-
-
+ modal_img()
 
   //var str = syntaxHighlight(data_list)
   //dataholder.innerHTML+='<pre id="json">'+str+'</pre>'
 
-  
+
+///Errors
+
+
+///All Data Accordion
+
+}
+
+
+
+
+
+
+function populateCZtable(mop){
+let cz_table=[[],[],[],[]];
+mop['cz'].forEach((c)=>{
+  cz_table[c['qubit_a_id']][c['qubit_b_id']]=c['fidelity']
+})
+console.log(cz_table)
+return cz_table
+
 }
 
 
@@ -263,3 +362,25 @@ function getRandomColor() {
 
 
 const ColorList=['#3399FF','#a3a3a3', '#FF9933', '#a3a3a3', '#243d57','#8c551d','#8fc7ff']
+
+
+function DataCard(title){
+  node=Object.assign(NewNode('div',['card','my-2']),{style:'width:100%'})
+  node.appendChild(NewNode('div',['card-header','text-center']))
+       .appendChild(Object.assign(NewNode('b'),{innerHTML:title}))
+  
+ 
+  return node
+ }
+ 
+ function ListItem(classes, innerHTML){
+   return Object.assign(NewNode('li',classes),{innerHTML:innerHTML})
+ }
+
+ function TableElement(tag, scope, classes, innerHTML ){
+  return Object.assign(NewNode(tag,classes),{scope: scope,innerHTML:innerHTML})
+}
+
+function changeRunNumber(value){
+  PAGESTATE['run']=value
+}

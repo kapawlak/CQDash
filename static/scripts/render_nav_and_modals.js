@@ -27,9 +27,11 @@ SOFTWARE.
 
 let sitedata
 
-///Start by just printing out json file.
+
+
+///Initiate the top navigation page and the links.
 function init_nav(linkfile) {
-  let lab_list = document.getElementById('lab_list')
+  let PageList = document.getElementById('PageList')
   let TeamList = document.getElementById('Team')
   fetch("pages/etc/config.json?v=" + Math.floor(Math.random() * 100000))
     .then(response => {
@@ -37,105 +39,65 @@ function init_nav(linkfile) {
     })
     .then(data => stash(data));
   function stash(data) {
-    sitedata = data
-    includeHTML(linkfile)
+    sitedata = data;
+    includeHTML(linkfile);
+    
+    document.getElementById('datasourcelabel').innerHTML = `
+      <img  height='30px'
+            src='${ABSOLUTE_LOCATION}static/assets/img/CQSym.png' 
+            class='px-2'>
+      </img>  
+      ${sitedata['Course-info']['name']}
+    `;
+
+    sitedata['page-links'].forEach((link) => {
+    PageList
+        .appendChild(NewNode('li'))
+        .appendChild(Object.assign(NewNode('a'), {classList: "dropdown-item", href: `?linkfile=${link["file"]}`, innerHTML: link["name"] }))
+        .parentNode
+        .parentNode
+        .appendChild(NewNode('li'))
+        .appendChild(NewNode('hr',["dropdown-divider"]))
+        .parentNode
+        .parentNode
+    } )
+    
+    PageList
+    .appendChild(NewNode('li'))
+      .appendChild(NewNode('hr',['dropdown-divider']))
+      .parentNode
+      .parentNode
+    .appendChild(NewNode('li'))
+    .appendChild(Object.assign(NewNode('a'),{classList: "dropdown-item", innerHTML: `<i class="bi bi-house-fill"></i> Home</a></li>`}))
+         
 
 
-    document.getElementById('datasourcelabel').innerHTML = `<img height='30px' src='${ABSOLUTE_LOCATION}static/assets/img/CQSym.png' class='px-2'></img>  ${sitedata['Course-info']['name']}`;
+    TeamList
+      .appendChild(NewNode('li', ["p-0", "m-0"])
+      .appendChild(Object.assign(NewNode('li', ['text-center', 'lead', 'bg-dark', 'text-white']),{innerHTML: `<b>Apps Team</b> `})))
+      .parentNode
+      .parentNode
+      .appendChild(NewNode('li'))
+      .appendChild(NewNode('hr',['dropdown-divider']))
 
+    ListMembers(sitedata['Team'],TeamList)
 
-    for (i = 0; i < sitedata['page-links'].length; i++) {
-      lab_list.innerHTML += `<li><a class="dropdown-item" href="?linkfile=${sitedata['page-links'][i]["file"]}">${sitedata['page-links'][i]["name"]}</a></li>`
-
-    }
-    lab_list.innerHTML += `<li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="?linkfile=home"><i class="bi bi-house-fill"></i> Home</a></li>`
-    //TA List Stuff
-
-    TeamList.innerHTML +=
-
-      `
-      <li>
-      <hr class="p-0 m-0" >
-            </li>
-      <li class="text-center lead bg-dark text-white"> 
-      <b>Apps Team</b> 
-      </li> 
-      <li ><hr class="p-0 m-0" ></li>`
-    for (i = 0; i < sitedata['Team'].length; i++) {
-      var first_name = sitedata['Team'][i]['first-name']
-      var last_name = sitedata['Team'][i]['last-name']
-      var title=sitedata['Team'][i]['title']
-      var email = sitedata['Team'][i]['email']
-      var location = sitedata['Team'][i]['location']
-
-      TeamList.innerHTML += `<li >
-              <div class="dropdown-item text-center py-1">
-                <div class="col-sm-12 nav-links lead">${first_name} ${last_name}</div>
-                <div class="row bg-CQ-lightgray p-1">
-                <a href="mailto:${email}" class="col"><i class="bi bi-envelope-fill px-1"></i></a>
-               
-                <button type="button" class="btn col px-1 py-0" data-bs-toggle="modal" data-bs-target="#infoModal" 
-                data-name="${first_name + ' ' + last_name}" 
-                data-title="${title}"
-                data-email="${email}" 
-                data-location="${location}" 
-                data-img="${sitedata['Team'][i]['img']}"
-                data-pronouns="${sitedata['Team'][i]['pronouns']}"
-                ><i class="bi bi-info-circle text-primary"></i></button>
-                </div>
-              </div>
-            </li>`
-
-    }
-    TeamList.innerHTML +=
-      `<li>
-            <hr class="p-0 m-0" >
-          </li>
-            <li class="text-center lead bg-dark text-CQ-orange"> 
-      <b>Leadership</b>
-      </li> 
-            <li>
-            <hr class="p-0 m-0" >
-            </li>`
-
-    for (i = 0; i < sitedata['Management'].length; i++) {
-      var first_name = sitedata['Management'][i]['first-name']
-      var last_name = sitedata['Management'][i]['last-name']
-      var title = sitedata['Management'][i]['title']
-      var email = sitedata['Management'][i]['email']
-      var location = sitedata['Management'][i]['location']
-
-      TeamList.innerHTML += `<li>
-        <div class="dropdown-item text-center">
-        <div class="col-sm-12 nav-links lead">${first_name} ${last_name}</div>
-        <div class="row bg-CQ-lightgray p-1">
-        <a href="mailto:${email}" class="col"><i class="bi bi-envelope-fill px-1"></i></a>
-        
-        <button type="button" class="btn col px-1 py-0" data-bs-toggle="modal" data-bs-target="#infoModal" 
-                data-name="${first_name + ' ' + last_name}" 
-                data-title= "${title}"
-                data-email="${email}" 
-                data-location="${location}" 
-                data-img="${sitedata['Management'][i]['img']}"
-                data-pronouns="${sitedata['Management'][i]['pronouns']}"
-                ><i class="bi bi-info-circle text-primary"></i></button>
-              </div>
-            </li>`
-
-    }
-
-
-
+    TeamList
+    .appendChild(NewNode('li')).appendChild(NewNode('hr',['p-0','m-0']))
+    .parentNode
+    .appendChild(Object.assign(NewNode('li',['text-center','lead','bg-dark', 'text-CQ-orange']),{innerHTML:`<b>Leadership</b>`}))
+    .parentNode
+    .appendChild(NewNode('li')).appendChild(NewNode('hr',['p-0','m-0']))
+   
+    ListMembers(sitedata['Management'],TeamList)
+    
   }
-
-
 
 }
 
-//<a href="${room}" class="col"><i class="bi bi-camera-video-fill px-1 py-0"></i></a>
+
+
+
 
 var infoModal = document.getElementById('infoModal')
 infoModal.addEventListener('show.bs.modal', function (event) {
@@ -154,7 +116,7 @@ infoModal.addEventListener('show.bs.modal', function (event) {
 
   modalBodyInput.innerHTML = ''
   let color
-  if (button.getAttribute('data-title') == "TA") {
+  if (button.getAttribute('data-title') == "Quantum Applications Engineer") {
     color = "primary"
   } else {
     color = "danger"
@@ -189,7 +151,7 @@ infoModal.addEventListener('show.bs.modal', function (event) {
   ${button.getAttribute('data-location')}
 
   `}
-  
+
 })
 
 var imgModal = document.getElementById('imgModal')
@@ -213,16 +175,11 @@ imgModal.addEventListener('show.bs.modal', function (event) {
   `
 
   quick_math(document.getElementById('imgModal'))
-
-
-
-
 })
 
 
 function modal_img() {
   imgs = document.querySelectorAll("img")
-  var details
   for (i = 0; i < imgs.length; i++) {
     imgs[i].setAttribute('data-bs-toggle', "modal")
     imgs[i].setAttribute('data-bs-target', "#imgModal")
@@ -230,9 +187,6 @@ function modal_img() {
       imgs[i].outerHTML += imgs[i].getAttribute('title')
     }
   }
-
-
-
 }
 
 
@@ -241,3 +195,47 @@ window.document.onload = function (e) {
     (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred));
 }
 
+
+
+////////////////////// Utility
+
+function ListMembers(dictionary,groupdiv){
+  dictionary.forEach((member) => {
+    member['name'] = member['first-name'] + ' ' + member['last-name']
+    member['bs-toggle'] = 'modal'
+    member['bs-target'] = "#infoModal"
+    button = groupdiv
+      .appendChild(NewNode('div', ["dropdown-item", "text-center", "py-1"]))
+      .appendChild(Object.assign(NewNode('div', ["col-sm-12", "nav-links", "lead"]), { innerHTML: `${member['first-name']} ${member['last-name']}` }))
+      .parentNode
+      .appendChild(NewNode('div', ["row", "bg-CQ-lightgray", "p-1"]))
+      .appendChild(Object.assign(NewNode('a', ["col"]), { href: "mailto:${email}", innerHTML: `<i class="bi bi-envelope-fill px-1"></i>` }))
+      .parentNode
+      .appendChild(Object.assign(NewNode('button', ['btn', 'col', 'px-1', 'py-0']), { innerHTML: `<i class="bi bi-info-circle text-primary"></i></button>` }))
+
+    Object.keys(member).forEach((datum) => { button.setAttribute(`data-${datum}`, member[datum]) })
+
+  })
+}
+
+function NewNode(tag, classList = null) {
+  let this_node = Object.assign(document.createElement(tag));
+
+  if (Array.isArray(classList)) {
+    classList.forEach((e) => { this_node.classList.add(e) });
+  }
+
+  return this_node
+}
+
+
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+  }
+  
