@@ -111,34 +111,8 @@ function replace_tags() {
       }
     }
 
-    var buts = document.getElementsByClassName('mats')
-    for(i=0; i<buts.length;i++){
-      buts[i].onclick= function(){
-        this.classList.toggle('btn-CQ-navy')
-        this.classList.toggle('btn-CQ-orange')
-        this.querySelector('span').classList.remove('bg-danger')
-        this.querySelector('span').classList.add('bg-secondary')
-      }
-    }
 
-    var quizzes = document.getElementsByClassName('quizlet')
-    for(i=0; i<quizzes.length;i++){
-  
-
-      quizzes[i].onclick= function(){
-        var result=katex_map.get(this.id)
-
-        document.getElementById(this.dataset.modify).innerHTML=result
-         renderMathInElement( document.getElementById(this.dataset.modify), {
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "$", right: "$", display: false },
-            { left: "\\(", right: "\\)", display: false },
-            { left: "\\[", right: "\\]", display: true }
-          ]
-        })
-      }
-    }
+    
 
  
   }

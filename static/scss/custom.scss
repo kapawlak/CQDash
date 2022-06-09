@@ -899,8 +899,15 @@ overflow-x: hidden;
 
 .katex { font-size: 105%; }
  
-
-
+.Ops{
+    .card-footer{
+        font-weight: 200;
+        font-size: 75%;
+    }
+    table{
+        margin: 0;
+    }
+}
 
 
 .pronoun{

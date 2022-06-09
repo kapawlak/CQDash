@@ -11280,6 +11280,12 @@ img:hover {
 .katex {
   font-size: 105%; }
 
+.Ops .card-footer {
+  font-weight: 200;
+  font-size: 75%; }
+.Ops table {
+  margin: 0; }
+
 .pronoun {
   font-size: 0.7em; }
 

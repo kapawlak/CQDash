@@ -179,11 +179,16 @@ function DisplayData(location){
 
 ///SPAM & Single Qubit Operations Table
  let single_qubit_oplist=['spam','gr', 'rz']
+ let single_qubit_tolerance={
+                          'spam': [0.95, 0.03],
+                          'gr': [0.999, 0.005],
+                          'rz': [0.99, 0.01]
+                        }
  let two_quibit_oplist=['cz']
  let qubit_list=['Q1','Q2','Q3','Q4']
 
  let mop=PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['machinestatus']['operations']
- let machine_table=dataholder.appendChild(DataCard('Single Qubit Gate and SPAM Fidelity'))
+ let machine_table=dataholder.appendChild(DataCard('Single Qubit Gate and SPAM Fidelity'),['Ops'])
                          .appendChild(NewNode('table',['table','table-bordered']))
  let machine_body=NewNode('tbody')
                          
@@ -200,10 +205,10 @@ machine_table.appendChild(machine_body)
 //Create table qubit by qubit
 single_qubit_oplist.forEach((op)=>{
   var row_data=NewNode('tr',['table-bordered'])
-  row_data.appendChild(TableElement('th','row',['text-center'], op))
+  row_data.appendChild(TableElement('th','row',['text-center','align-middle'], op))
 
   qubit_list.forEach((q,i)=>{
-    row_data.appendChild(Object.assign(NewNode('td',['text-center']),{
+    row_data.appendChild(Object.assign(NewNode('td',['text-center','align-middle']),{
     innerHTML:
       `<span title='${mop[op][i]["fidelity"]["value"]}'>${mop[op][i]["fidelity"]["value"].toFixed(3)} </span><br>
       <small class="bs-lightgray" style="font-size:80%" title="${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)}">
@@ -211,17 +216,21 @@ single_qubit_oplist.forEach((op)=>{
       </small> 
       <small class="bs-lightgray" style="font-size:80%" title='${mop[op][i]["fidelity"]["lower_sigma"]}'>,
        ${mop[op][i]["fidelity"]["lower_sigma"].toFixed(4)})
-      </small>`}))
+      </small>`, 
+      style:`background-color:${cellColor(mop[op][i]["fidelity"]["value"],single_qubit_tolerance[op][0],single_qubit_tolerance[op][1])}`}))
     })
    machine_body.appendChild(row_data)
  })
 
 
+ machine_table.parentNode.appendChild(Object.assign(NewNode('div',['card-footer','text-center']),{
+  innerHTML: "<a href='?linkfile=GettingStarted#SingleQubitFidelities'>How we calculate single qubit fidelities</a>"
+}))
 
 
 
 ///////Two Qubit Operations Table
-let entangle_table=dataholder.appendChild(DataCard('Entangling Gate Information'))
+let entangle_table=dataholder.appendChild(DataCard('Entangling Gate Information',['Ops']))
                           .appendChild(NewNode('table',['table','table-bordered']))
 let entangle_body=NewNode('tbody');
 
@@ -240,7 +249,7 @@ let cz_table=populateCZtable(mop)
 qubit_list.forEach((q1,i)=>{
 
   var row_data=NewNode('tr',['table-bordered'])
-  row_data.appendChild(TableElement('th','row',['text-center'], q1))
+  row_data.appendChild(TableElement('th','row',['text-center','align-middle'], q1))
 
   qubit_list.forEach((q2,j) =>{
     
@@ -249,27 +258,30 @@ qubit_list.forEach((q1,i)=>{
       datacell.classList.add("bg-CQ-lightgray")
     }else{
       two_quibit_oplist.forEach((qq)=>{
-        
-        if(cz_table[i][j]==null){
+        if(cz_table[i][j]==null && cz_table[j][i]==null){
           datacell.classList.add("bg-CQ-lightgray")
         }else
             {
+            cell_values=(cz_table[i][j]||cz_table[j][i])
             datacell.innerHTML+=
-              `<span title='${cz_table[i][j]["value"]}'>${cz_table[i][j]["value"].toFixed(3)} </span><br>
-              <small class="bs-lightgray" style="font-size:80%" title="${cz_table[i][j]["upper_sigma"].toFixed(4)}">
-                (${cz_table[i][j]["upper_sigma"].toFixed(4)}
+              `<b>CZ</b>: <span title='${cell_values["value"]}'>${cell_values["value"].toFixed(3)} </span><br>
+              <small class="bs-lightgray" style="font-size:80%" title="${cell_values["upper_sigma"].toFixed(4)}">
+                (${cell_values["upper_sigma"].toFixed(4)}
               </small> 
-              <small class="bs-lightgray" style="font-size:80%" title='${cz_table[i][j]["lower_sigma"]}'>,
-                ${cz_table[i][j]["lower_sigma"].toFixed(4)})
+              <small class="bs-lightgray" style="font-size:80%" title='${cell_values["lower_sigma"]}'>,
+                ${cell_values["lower_sigma"].toFixed(4)})
               </small>`; 
             }
+            datacell.style.backgroundColor=cellColor(cell_values["value"],0.95,0.03)
           }
             )
           }
       })
     entangle_body.appendChild(row_data)
 })
-entangle_table.appendChild(Object.assign(NewNode('div',[card-footer]),{innerHTML: "How we calculate two-qubit gate fidelities"}))
+entangle_table.parentNode.appendChild(Object.assign(NewNode('div',['card-footer','text-center']),{
+  innerHTML: "<a href='?linkfile=GettingStarted#TwoQubitFidelities'>How we calculate two-qubit gate fidelities</a>"
+}))
 
 
 
@@ -286,6 +298,21 @@ entangle_table.appendChild(Object.assign(NewNode('div',[card-footer]),{innerHTML
 
 
 ///Errors
+errorcard= dataholder.appendChild(NewNode('div',['col']))
+.appendChild(DataCard('Errors'))
+.appendChild(NewNode('ul',['list-group','list-group-flush','center']))
+
+Object.keys(PAGESTATE['run-data'].data).filter(e=>e.includes('error')).forEach( (er) =>{
+  errorcard.append(
+  ListItem(["list-group-item"],` <div class="fw-bold">${er}:</div> ${PAGESTATE[er]}`),
+)})
+
+Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['errors']).forEach( (er) =>{
+  errorcard.append(
+  ListItem(["list-group-item"],` ${er}: ${PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['errors'][er]}`),
+)}
+)
+
 
 
 ///All Data Accordion
@@ -364,11 +391,14 @@ function getRandomColor() {
 const ColorList=['#3399FF','#a3a3a3', '#FF9933', '#a3a3a3', '#243d57','#8c551d','#8fc7ff']
 
 
-function DataCard(title){
+function DataCard(title, classes = null){
   node=Object.assign(NewNode('div',['card','my-2']),{style:'width:100%'})
   node.appendChild(NewNode('div',['card-header','text-center']))
        .appendChild(Object.assign(NewNode('b'),{innerHTML:title}))
   
+  if(classes){
+    node.classList.add(classes)
+  }
  
   return node
  }
@@ -383,4 +413,23 @@ function DataCard(title){
 
 function changeRunNumber(value){
   PAGESTATE['run']=value
+}
+
+
+
+
+
+function copytoClipboard(){
+  var copyText=JSON.stringify(PAGESTATE['run-data'].data)
+  navigator.clipboard.writeText(copyText);
+ 
+
+}
+
+
+
+function cellColor(value, goal, tol){
+  //value from 0 to 1
+  var hue=(Math.min(1.00,(Math.exp(-Math.sign(goal-value)*((goal-value)**2)/(2*tol**2))))*120).toString(10);
+  return ["hsl(",hue,",100%,90%)"].join("");
 }
