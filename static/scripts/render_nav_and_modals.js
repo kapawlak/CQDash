@@ -183,7 +183,7 @@ function modal_img() {
   for (i = 0; i < imgs.length; i++) {
     imgs[i].setAttribute('data-bs-toggle', "modal")
     imgs[i].setAttribute('data-bs-target', "#imgModal")
-    if (imgs[i].getAttribute('title')) {
+    if (imgs[i].getAttribute('title') && !imgs[i].parentNode.classList.contains('CircuitImage')) {
       imgs[i].outerHTML += imgs[i].getAttribute('title')
     }
   }

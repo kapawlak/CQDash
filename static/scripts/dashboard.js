@@ -161,34 +161,35 @@ function DisplayData(location){
     .appendChild(DataCard('Parameters'))
     .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
     .append(
-      ListItem(["list-group-item"],` <div class="fw-bold">Shots:</div> ${PAGESTATE['run-data'].data['parameters']['shots']}`),
-      ListItem(["list-group-item"],` <div class="fw-bold">Coupling map:</div> ${PAGESTATE['run-data'].data['parameters']['coupling']}`),
-      ListItem(["list-group-item"],` <div class="fw-bold">Optimization:</div> ${PAGESTATE['run-data'].data['parameters']['optimization']}`))
+      ListItem(["list-group-item"],` <div class="fw-bold" style='display:inline'>Shots:</div> ${PAGESTATE['run-data'].data['parameters']['shots']}`),
+      ListItem(["list-group-item"],` <div class="fw-bold">Coupling map:</div><div class='text-center'> <svg height="150" width="150" id="CouplingSVG"> ${PAGESTATE['run-data'].data['parameters']['coupling']}</svg></div>`),
+      ListItem(["list-group-item"],` <div class="fw-bold" style='display:inline'>Optimization:</div> ${PAGESTATE['run-data'].data['parameters']['optimization']}`))
 
    //Append Identity
    datadiv.appendChild(NewNode('div',['col']))
    .appendChild(DataCard('Identity'))
    .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
    .append(
-     ListItem(["list-group-item"],` <div class="fw-bold">User:</div> ${PAGESTATE['run-data'].data['identity']['first']} ${PAGESTATE['run-data'].data['identity']['last']}, ${PAGESTATE['run-data'].data['identity']['title']}`),
+     ListItem(["list-group-item"],` <div class="fw-bold">User:</div> ${PAGESTATE['run-data'].data['identity']['first']} ${PAGESTATE['run-data'].data['identity']['last']} <span class="badge bg-CQ-orange">${PAGESTATE['run-data'].data['identity']['title']}</span>`),
      ListItem(["list-group-item"],` <div class="fw-bold">Organization:</div> ${PAGESTATE['run-data'].data['identity']['organization']}`),
      ListItem(["list-group-item"],` <div class="fw-bold">Git:</div> ${PAGESTATE['run-data'].data['identity']['giturl']} `),
      ListItem(["list-group-item"],` <div class="fw-bold">Version:</div> ${PAGESTATE['run-data'].data['versions']['qiskit-coldquanta']}/${PAGESTATE['run-data'].data['versions']['qexp']}`)
      )
+    let single_qubit_oplist=['spam','gr', 'rz']
+    let single_qubit_tolerance={
+                            'spam': [0.95, 0.03],
+                            'gr': [0.999, 0.005],
+                            'rz': [0.99, 0.01]
+                          }
+    let two_quibit_oplist=['cz']
+    let qubit_list=['Q0','Q1','Q2','Q3']
+  
+    let mop=PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['machinestatus']['operations']
 
-
+if(PAGESTATE['run-data'].data['parameters']['device']==='Hilbert'){
 ///SPAM & Single Qubit Operations Table
- let single_qubit_oplist=['spam','gr', 'rz']
- let single_qubit_tolerance={
-                          'spam': [0.95, 0.03],
-                          'gr': [0.999, 0.005],
-                          'rz': [0.99, 0.01]
-                        }
- let two_quibit_oplist=['cz']
- let qubit_list=['Q1','Q2','Q3','Q4']
 
- let mop=PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['machinestatus']['operations']
- let machine_table=dataholder.appendChild(DataCard('Single Qubit Gate and SPAM Fidelity'),['Ops'])
+ let machine_table=dataholder.appendChild(DataCard('Single Qubit Gate and SPAM Fidelities',['Ops']))
                          .appendChild(NewNode('table',['table','table-bordered']))
  let machine_body=NewNode('tbody')
                          
@@ -230,17 +231,17 @@ single_qubit_oplist.forEach((op)=>{
 
 
 ///////Two Qubit Operations Table
-let entangle_table=dataholder.appendChild(DataCard('Entangling Gate Information',['Ops']))
+let entangle_table=dataholder.appendChild(DataCard('Entangling Gate Fidelities',['Ops']))
                           .appendChild(NewNode('table',['table','table-bordered']))
 let entangle_body=NewNode('tbody');
 
 entangle_table.appendChild(NewNode('thead'))
 .appendChild(NewNode('tr')).append(
             TableElement('th', 'col',['text-center'],''),
+            TableElement('th', 'col',['text-center'],'Q0'),
             TableElement('th', 'col',['text-center'],'Q1'),
             TableElement('th', 'col',['text-center'],'Q2'),
-            TableElement('th', 'col',['text-center'],'Q3'),
-            TableElement('th', 'col',['text-center'],'Q4'))
+            TableElement('th', 'col',['text-center'],'Q3'))
 
 
 entangle_table.appendChild(entangle_body);
@@ -283,12 +284,16 @@ entangle_table.parentNode.appendChild(Object.assign(NewNode('div',['card-footer'
   innerHTML: "<a href='?linkfile=GettingStarted#TwoQubitFidelities'>How we calculate two-qubit gate fidelities</a>"
 }))
 
-
+}
 
  ///Circuit Image 
  locpeices=location.split("/")
- dataholder.appendChild(DataCard('Circuit Image')).appendChild(Object.assign(NewNode('div','text-center'),{
-   innerHTML:`<img src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}/_0.png' width="100%" title='Circuit'></img>`
+ dataholder.appendChild(DataCard('Circuit Image')).appendChild(Object.assign(NewNode('div',['text-center','CircuitImage']),{
+   innerHTML:`<img 
+   src='${locpeices[0]}/${locpeices[1]}/img/${locpeices[2].split('_')[1]}_${locpeices[2].split('_')[2]}/_0.png' 
+   width="100%" 
+   title='Circuit'
+   style='max-width: 500px'></img>`
  }))
  
  modal_img()
@@ -298,6 +303,7 @@ entangle_table.parentNode.appendChild(Object.assign(NewNode('div',['card-footer'
 
 
 ///Errors
+if(Object.keys(PAGESTATE['run-data'].data).filter(e=>e.includes('error')).length+PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['errors'].length > 0){
 errorcard= dataholder.appendChild(NewNode('div',['col']))
 .appendChild(DataCard('Errors'))
 .appendChild(NewNode('ul',['list-group','list-group-flush','center']))
@@ -312,11 +318,14 @@ Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['errors']).forE
   ListItem(["list-group-item"],` ${er}: ${PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['errors'][er]}`),
 )}
 )
-
+}
 
 
 ///All Data Accordion
 
+
+///SVG place
+drawSVG(JSON.parse(PAGESTATE['run-data'].data['parameters']['coupling']))
 }
 
 
@@ -397,6 +406,7 @@ function DataCard(title, classes = null){
        .appendChild(Object.assign(NewNode('b'),{innerHTML:title}))
   
   if(classes){
+    console.log(classes)
     node.classList.add(classes)
   }
  
@@ -433,3 +443,66 @@ function cellColor(value, goal, tol){
   var hue=(Math.min(1.00,(Math.exp(-Math.sign(goal-value)*((goal-value)**2)/(2*tol**2))))*120).toString(10);
   return ["hsl(",hue,",100%,90%)"].join("");
 }
+
+
+ATOMCOORDS={
+  0 : [0.15,0.15],
+  1 : [0.85,0.15],
+  2 : [0.15,0.85],
+  3 : [0.85, 0.85]
+  }
+  
+
+  
+  function drawLine(SVG, pair){
+    var dim=SVG.attributes.height.value
+
+  SVG.innerHTML+=
+   ` <line 
+     x1='${(ATOMCOORDS[pair[0]][0]*dim).toString()}' 
+    y1="${(ATOMCOORDS[pair[0]][1]*dim).toString()}" 
+    x2="${(ATOMCOORDS[pair[1]][0]*dim).toString()}" 
+    y2="${(ATOMCOORDS[pair[1]][1]*dim).toString()}" 
+    style="stroke:#FF9933;stroke-width:2" />`
+  }
+  
+  function drawAtoms(SVG){
+
+  var dim=SVG.attributes.height.value
+  console.log('dim: ', dim)
+  console.log('atomcoords: ', ATOMCOORDS[2][0])
+  console.log('mult: ', ATOMCOORDS[2][0]*dim)
+  Object.keys(ATOMCOORDS).forEach((a)=>{
+  SVG.innerHTML+=`<circle 
+  cx="${(ATOMCOORDS[a][0]*dim).toString()}" 
+  cy="${(ATOMCOORDS[a][1]*dim).toString()}" 
+  r="${0.1*dim}" 
+  stroke="teal" 
+  stroke-width="0" 
+  fill="#3399FF" />
+  <text 
+  x="${(ATOMCOORDS[a][0]*dim).toString()}" 
+  y="${(ATOMCOORDS[a][1]*dim).toString()}" 
+  fill="black"
+  text-anchor="middle"
+  dominant-baseline="middle"
+  font-size="0.75rem">
+  Q${a}</text>`
+  
+  })
+  }
+  
+  
+  
+  function drawSVG(pairs){
+  console.log(pairs)
+  var node = document.getElementById('CouplingSVG')
+  node.innerHTML=''
+  
+  pairs.forEach((p)=>{ console.log(p); drawLine(node,p)})
+  drawAtoms(node)
+  return node
+  }
+  
+  
+  
