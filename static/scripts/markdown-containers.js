@@ -25,15 +25,13 @@ SOFTWARE.
 */
 
 //Reference Objects
-var Counter = {}; //This keeps track of the number of each element and their reference name
-var div_head = []; //This list lets us print out the headers for custom classes
-var div_foot = []; //This list lets us print ou the footers of custom classes using first-in-first-out when there are nested containers
-const katex_map = new Map(); //saves key pairs for retreiving latex in blurbs
+var COUNTER = {}; //This keeps track of the number of each element and their reference name
+var DIVHEAD = []; //This list lets us print out the headers for custom classes
+var DIVFOOT = []; //This list lets us print ou the footers of custom classes using first-in-first-out when there are nested containers
+const KATEXMAP = new Map(); //saves key pairs for retreiving latex in blurbs
 
 //Class Groups
-
 const fig_group = "justify-content-center text-center px-0 mx-3 mb-4" //Formatting that is special for figues -- adds margins to floated figs
-
 const narrow_center = "col-lg-9 mx-auto my-5"
 const blurb_center = "col-lg-8 mx-auto"
 const collapsable_header = ' fs-4 align-bottom'
@@ -108,7 +106,6 @@ class Card{
         this.collapse=true
         this.styleList.push(narrow_center)
         this.innerStyles[0]+= ' fs-5 align-bottom text-left'
-
         break
       case 'Activity':
         this.collapse=true
@@ -143,14 +140,13 @@ class Card{
   }
 
   publishCard (){ 
-    this.collapse ?  classAcc(this) : classCard(this);
-    
+    this.collapse ?  classAcc(this) : classCard(this);    
   }
 
  }
 
 function classCard(c) {
-  div_head.push(`
+  DIVHEAD.push(`
   <div id="${c.ref}" 
     class="${[c.styleList.join(' ')]} " 
     data-kiwi="${c.number}" 
@@ -166,7 +162,7 @@ function classCard(c) {
       <div class="card-text card-body ${c.innerStyles[2]}">
     `)
 
-  div_foot.push(`
+  DIVFOOT.push(`
       </div>
     </div>
     ${(c.footerText == '' || c.footerText == null ? '' :
@@ -181,7 +177,7 @@ function classCard(c) {
 
 function classAcc(c) {
 
-  div_head.push(`
+  DIVHEAD.push(`
   <div id="${c.ref}" 
     class="accordion accordion-flush card col-card ${[c.styleList.join(' ')]} " 
     data-kiwi="${c.number}" 
@@ -202,7 +198,7 @@ function classAcc(c) {
           <div class="accordion-body container">
     `)
 
-  div_foot.push(`
+  DIVFOOT.push(`
           </div>
         </div>
       </div>
@@ -212,7 +208,6 @@ function classAcc(c) {
 
 
 //////////////// CUSTOM CONTAINER DEFS
-
 ///Full////
 md.use(container, 'Full', {
 // Input Format is: 
@@ -239,9 +234,9 @@ md.use(container, 'Intro', {
       intro.headerText=args[0]
       intro.footerText=(args.slice(1).length ? Full(args.slice(1)) : null)
       intro.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -255,15 +250,13 @@ md.use(container, 'Quiz', {
       args = strip_leave(tokens[idx].info.trim().match(/^Quiz(.*)$/)[1])
       let quiz=new Card("Quiz", args[0].replace(/[^a-zA-Z0-9]/g,''))
       quiz.publishCard()
-
-
       quizinner= quizzy(args.slice(1), quiz.ref)
-      div_foot[div_foot.length-1]= quizinner  +div_foot[div_foot.length-1]
+      DIVFOOT[DIVFOOT.length-1]= quizinner  +DIVFOOT[DIVFOOT.length-1]
       console.log(quiz.ref)
-      return `${div_head.pop()} `
+      return `${DIVHEAD.pop()} `
     } else {
       return ` <hr>
-      ${div_foot.pop()}`
+      ${DIVFOOT.pop()}`
     }
   }
 })
@@ -283,9 +276,9 @@ md.use(container, 'Instruction', {
       ex.innerStyles[3]+=' py-0'
       ex.styleList.push(' ' + args[2])
       ex.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -302,9 +295,9 @@ md.use(container, 'Equation', {
       if(args[1]!= null && args[1]!=''){
       eq.headerText= md.render(args[1] )}
       eq.publishCard()    
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -320,9 +313,9 @@ md.use(container, 'Code', {
       let code= new Card("Code", args[0])
       code.publishCard()
 
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -341,9 +334,9 @@ md.use(container, 'Note', {
       note.styleList.push(args[1] ? 'col-lg-' + args[1].replace("L","float-lg-start ").replace("R","float-lg-end") : 'col-lg-10 mx-auto' )
       note.publishCard()
  
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -359,9 +352,9 @@ md.use(container, 'Warning', {
       let warn= new Card('Warning', args[0])
       warn.styleList.push(args[1] ? 'col-lg-' + args[1] : 'col-lg-5')
       warn.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -379,9 +372,9 @@ md.use(container, 'Definition', {
       def.headerText+=`<span class=''>${args[0]} </span>`
       def.styleList.push(args[1] ? 'col-lg-' + args[1].replace("L","float-lg-start mt-0 mb-1 mx-3 ").replace("R","float-lg-end mt-0 mb-1 mx-3 ").replace("C","mx-auto my-4 ") : 'col-lg-10 mx-auto my-5' )
       def.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -398,9 +391,9 @@ md.use(container, 'Prelab', {
       let def= new Card("Prelab", args[0])
 
       def.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -419,9 +412,9 @@ md.use(container, 'Table', {
      
       table.footerText+=( args[1]? ': ' + args[1] : '')
       table.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -444,9 +437,9 @@ md.use(container, 'Hider', {
       hide.headerText=args[1]
       hide.publishCard()
       //card_maker_collapse('Hider', args[0], args[1], [group1, pad_mar].join(' '), inner_styles)
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -465,9 +458,9 @@ md.use(container, 'Activity', {
       Activity.headerText+= args[1] ?  `<div class='col-lg-12 text-left justify-content-start' > <span class='lead align-baseline' style="padding-left:0px"> ${args[1]} </span></div>` : ''
       Activity.headerText+='</div>'
       Activity.publishCard()
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -488,9 +481,9 @@ md.use(container, 'Simulation', {
       sim.headerText+=`</div></div>`
       sim.publishCard()
       // card_maker_collapse('Simulation', args[0], title, [group1, pad_mar, args[2]].join(' '))
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -520,9 +513,9 @@ md.use(container, 'Figure', {
       fig.styleList.push(args[2] ? args[2].replace('Row', 'rowfig').replace('L', 'float-lg-start').replace('R', 'float-lg-end') : '')
       fig.publishCard()
       // card_maker('Figure', args[0], '', 'Figure #', [fig_group, extra, args[1]].join(' '), ['', 'text-center', ''])
-      return div_head.pop()
+      return DIVHEAD.pop()
     } else {
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -571,9 +564,9 @@ md.use(container, 'Card', {
     card.footerText=args[2]
     card.styleList.push(args.slice(3))  
     card.publishCard()
-    return div_head.pop()
+    return DIVHEAD.pop()
     }else{
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -590,9 +583,9 @@ md.use(container, 'Drop', {
     drop.footerText=args[2]
     drop.innerStyles[0]+= ' ' + args.slice(3)  
     drop.publishCard()
-    return div_head.pop()
+    return DIVHEAD.pop()
     }else{
-      return div_foot.pop()
+      return DIVFOOT.pop()
     }
   }
 })
@@ -616,22 +609,22 @@ md.use(container, 'Drop', {
 //This counter
 function updateCounter(ref, type){
   let this_count
-  if (Counter[type]) {
-    this_count= Counter[type].length + 1
+  if (COUNTER[type]) {
+    this_count= COUNTER[type].length + 1
     if (ref == '') {
-      Counter[type].push([this_count, type+'-'+this_count])
+      COUNTER[type].push([this_count, type+'-'+this_count])
     }else{
-      Counter[type].push([this_count, type+'-'+ref])
+      COUNTER[type].push([this_count, type+'-'+ref])
     }
    ;
   } else {
     this_count=1
-    Counter[type] = []
+    COUNTER[type] = []
     
     if (ref == '') {
-      Counter[type][0]=[this_count, type+'-'+this_count]
+      COUNTER[type][0]=[this_count, type+'-'+this_count]
     }else{
-      Counter[type][0]=[this_count, type+'-'+ref]
+      COUNTER[type][0]=[this_count, type+'-'+ref]
     }
 
   }
@@ -856,16 +849,16 @@ md.use(container, 'Summary', {
         </div>
         <div class='row g-0' >`
       
-      if(Counter["Activity"]){
+      if(COUNTER["Activity"]){
         string+=`
       
         <div class='col-3 text-center badge-Activity container fs-3 text-white'>
-          <span class='badge badge-Activity fs-1 text-white'> ${Counter["Activity"].length} </span> <br> Activities
+          <span class='badge badge-Activity fs-1 text-white'> ${COUNTER["Activity"].length} </span> <br> Activities
           </div> `    
       string+=`
         <div class='col-9' style='border-bottom:1px solid var(--bs-secondary)'>
           <ul class="list-inline px-1 py-0 mb-3 " >`
-      Counter["Activity"].forEach((e)=> {
+      COUNTER["Activity"].forEach((e)=> {
         string += `<li class="list-inline-item align-middle py-1">
             <a 
               tabindex="0"  
@@ -890,14 +883,14 @@ md.use(container, 'Summary', {
     
         <div class='row g-0'>
         <div class='col-3 text-center badge-Instruction container fs-3 text-white'>
-          <span class='badge badge-Instruction fs-1 text-white'> ${Counter["Instruction"].length} </span> <br> Instructions
+          <span class='badge badge-Instruction fs-1 text-white'> ${COUNTER["Instruction"].length} </span> <br> Instructions
           </div> `
        
       string+=`
         <div class='col-9 '>
           <ul class="list-inline px-1 py-0 mb-3 " >`
  
-        Counter["Instruction"].forEach((e)=> {
+        COUNTER["Instruction"].forEach((e)=> {
           string += `<li class="list-inline-item align-middle py-1">
               <a 
                 tabindex="0"  
@@ -957,7 +950,7 @@ function quizzy(args,ref) {
     // console.log(e)
     obj = e.split('---')[0]; deet = e.split('---').slice(1).join(' ');
     var katex_key=`${ref}_ans_${i}`
-    katex_map.set(katex_key, deet)
+    KATEXMAP.set(katex_key, deet)
     // console.log(obj, deet)
     inner += `<li class="list-group-item align-middle py-1 ">
               <a tabindex="0"  role="button" class="btn btn-CQ-navy position-relative quizlet" 
