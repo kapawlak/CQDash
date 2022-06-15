@@ -12,7 +12,7 @@ function importDirData() {
 }
 
 function returnJSONdata(file, project_directory, callback) {
-    console.log('./'+file)
+    console.log('qexp_data/'+file)
     fetch(file)
         .then(response => {
             return response.json();
