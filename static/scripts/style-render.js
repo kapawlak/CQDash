@@ -133,19 +133,6 @@ function scrolltohash(){
 
 
 
-function quick_math(t){
-
-  renderMathInElement(t, {
-    delimiters: [
-      { left: "$$", right: "$$", display: true },
-      { left: "$", right: "$", display: false },
-      { left: "\\(", right: "\\)", display: false },
-      { left: "\\[", right: "\\]", display: true }
-    ]
-  })
-}
-
-
 
 function emergency_reload_iframes(){
   iframes= document.getElementsByTagName('iframe')

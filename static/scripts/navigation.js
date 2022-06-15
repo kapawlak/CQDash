@@ -23,10 +23,7 @@ function returnJSONdata(file, project_directory, callback) {
 
 
 function initiateNavBar(directory_data) {
-    console.log('directory data',directory_data)
-    console.log('PN KEYS',Object.keys(directory_data).sort())
     Object.keys(directory_data).sort().forEach((project)=>{
-       console.log(project)
         if (project.includes('.') != true && project!= 'index' && project != 'pages') {   
             project_directory=
             returnJSONdata("/"+project+"/info", directory_data[project],build_accordion)
@@ -39,18 +36,19 @@ function initiateNavBar(directory_data) {
 function build_accordion(project_directory, data){
     let state={'opened': true, 'level':1}
     //console.log(data)
-    let node=NewNode('div',['accordion-item'])
+    let node=accordion_item(data,state)
     node.appendChild(accordion_header(data,state))
+    l1_node=node.appendChild(accordion_container(data,state))
     Object.keys(project_directory).sort().reverse().filter(element => element!='info').sort().forEach((date)=>{
         
         data['date']=date
-        console.log('date', data['date'], 'project',data['name'])
         data['text_date']=date.substring(2, 4) + '/' + date.substring(4, 6) + '/' + date.substring(0, 2)
         state['level']=2
-        l2_node=node
+
+        l2_node=l1_node
+        .appendChild(accordion_item(data,state))
+        .appendChild(accordion_header(data,state)).parentNode
         .appendChild(accordion_container(data,state))
-        .appendChild(NewNode('div',['accordion-item']))
-        .appendChild(accordion_header(data,state))
         .parentNode
         state['level']=3
         l2_node=l2_node
@@ -69,15 +67,37 @@ function build_accordion(project_directory, data){
     document.getElementById("navcordion").appendChild(node)
 }
 
-function accordion_container(data, state){
-    let node=NewNode('div',['accordion-collapse','collapse', 'FINDME'])
+function accordion_item(data,state){
+    let node=NewNode('div',['accordion-item'])
     switch (state['level']){
+        case 1:
+            Object.assign(node,{id: 'ac-item'})
+            break
         case 2:
+            Object.assign(node,{id: 'ac-item'+data['projectname']})
+            break
+        case 3:
+            Object.assign(node,{id: 'ac-item'+data['projectname'] + data['date'] })
+            break
+    }
+    
+    return node
+}
+
+
+function accordion_container(data, state){
+    let node=NewNode('div',['accordion-collapse','collapse'])
+    switch (state['level']){
+        case 1:
             Object.assign(node,{id: 'collapse'+data['projectname']})
             node.dataset['bsParent'] = "#navcordion";
             break
+        case 2:
+            Object.assign(node,{id: 'collapse'+data['projectname']+data['date']})
+            //node.dataset['bsParent'] = "#navcordion";
+            break
         case 3:
-            Object.assign(node,{id: 'collapse'+data['projectname'] + data['date']})
+            Object.assign(node,{id: 'collapse'+data['projectname'] + data['date'] })
             node.dataset['bsParent'] = '#collapse'+data['projectname'] + data['date'];
             break
     }
@@ -127,7 +147,6 @@ function accordion_header(data, state){
     button.setAttribute('aria-controls', `collapse${datalabel}`)
     button.setAttribute('data-bs-toggle','collapse')
     button.setAttribute('data-bs-target',`#collapse${datalabel}`)
-    console.log(state,'datalabel:', datalabel)
 }else{
     node.innerHTML=innerHTML
 }

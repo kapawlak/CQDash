@@ -17,7 +17,7 @@ const ATOMCOORDS = {
 class RunData {
   constructor(json_data) {
     this.data = json_data
-    console.log('All Data', this.data)
+
     ///PLOTTING DATA
     //Construct the axis data
     this.axisdata = this.constructAxisData();
@@ -55,9 +55,9 @@ class RunData {
 
   constructDataSets() {
     var data1 = Object.values(this.data['runs']).map(e => e['output']['counts']);
-    console.log('data1', data1)
+
     var data2 = data1.map(e => this.axisdata.map(a => e[a]));
-    console.log('data2', data2)
+
     return data2
   }
 
@@ -109,7 +109,7 @@ function importRun(location, name, description) {
   //Set PAGESTATE attributes
   PAGESTATE['name'] = name
   PAGESTATE['description'] = description
-  console.log('PAGESTATE:', PAGESTATE)
+
   //initiate JSON fetch and synchronus callback
   returnJSONdata(location, location, DataRendering)
 }
@@ -354,7 +354,7 @@ function populateCZtable(mop) {
   mop['cz'].forEach((c) => {
     cz_table[c['qubit_a_id']][c['qubit_b_id']] = c['fidelity']
   })
-  console.log(cz_table)
+
   return cz_table
 
 }
@@ -411,7 +411,7 @@ function cardParameters(div) {
 function cardSummary() {
   var description = ``
     ;
-  console.log('keys: ', PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'])
+
   if (PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'] && Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']).includes('info')) {
     description = PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']['info']
   }
@@ -421,8 +421,8 @@ function cardSummary() {
   summary_space.append(
       ListItem(["list-group-item"], ` <div class="fw-bold">${PAGESTATE['name']}:</div> ${PAGESTATE['description']}`))
   if(description!=''){
-      summary_space.append(
-      ListItem(["list-group-item"], ` <div class="fw-bold">Run Information:</div> ${description}`))
+      quick_math(summary_space.appendChild(
+      ListItem(["list-group-item"], ` <div class="fw-bold">Run Information:</div> ${description}`)))
   }
 
   summary_space.append(exportToList(),
@@ -461,7 +461,7 @@ function cardOutputs() {
 
   var rt = PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['output']['run time'];
 
-  console.log('RT', rt)
+
   var node = NewNode('div', ['col'])
   node.appendChild(DataCard('Outputs'))
     .appendChild(NewNode('ul', ['list-group', 'list-group-flush', 'center']))
@@ -520,7 +520,7 @@ function DataCard(title, classes = null) {
     .appendChild(Object.assign(NewNode('b'), { innerHTML: title }))
 
   if (classes) {
-    console.log(classes)
+
     node.classList.add(classes)
   }
 
@@ -577,9 +577,6 @@ function drawLine(SVG, pair) {
 
 function drawAtoms(SVG){
   var dim = SVG.attributes.height.value
-  console.log('dim: ', dim)
-  console.log('atomcoords: ', ATOMCOORDS[2][0])
-  console.log('mult: ', ATOMCOORDS[2][0] * dim)
   Object.keys(ATOMCOORDS).forEach((a) => {
     SVG.innerHTML += `<circle 
   cx="${(ATOMCOORDS[a][0] * dim).toString()}" 
@@ -603,27 +600,24 @@ function drawAtoms(SVG){
 
 
 function drawSVG(pairs) {
-  console.log(pairs)
   var node = document.getElementById('CouplingSVG')
   node.innerHTML = ''
 
-  pairs.forEach((p) => { console.log(p); drawLine(node, p) })
+  pairs.forEach((p) => {drawLine(node, p) })
   drawAtoms(node)
   return node
 }
 
 
 function exportToList() {
-  console.log('EXPORTS:', PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'])
+
 
   var node = NewNode('div')
   if (PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']) {
 
-    console.log('EXPORTS2:', PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'])
 
     var my_exports = PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']
     var my_keys = Object.keys(my_exports).filter((e) => { return e != 'info' })
-    console.log('MYKEYS: ', my_keys)
     node = ListItem(["list-group-item"], ` <div class="fw-bold">Exports:</div>`);
 
     var my_list_ul = node.appendChild(NewNode('div', []))
@@ -634,6 +628,19 @@ function exportToList() {
     })
   }
 
-  console.log('node:', node)
+  quick_math(node)
   return node
+}
+
+
+function quick_math(t){
+
+  renderMathInElement(t, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false },
+      { left: "\\[", right: "\\]", display: true }
+    ]
+  })
 }
