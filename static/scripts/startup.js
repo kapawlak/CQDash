@@ -25,14 +25,13 @@ SOFTWARE.
 */
 
 
+///////////VERSION CHECK///////////////////////////////////////
 
 latest_version='0.1.8'
-
 
 if (VERSION == null || VERSION == 0) {
   AlertUpdate();
 } else {
-
   LV = latest_version.split('.').map(Number)
   V = VERSION.split('.').map(Number)
   BaseArray=[10000,100,1]
@@ -43,50 +42,37 @@ if (VERSION == null || VERSION == 0) {
   }
 }
 
-
-
-
 function AlertUpdate(){
-
-update=document.getElementsByClassName('navbar-nav')[0]
-var updatenotify=document.createElement('li')
-updatenotify.classList.add('nav-link')
-updatenotify.innerHTML= `<b><a href='https://gitlab.com/coldquanta/coldquanta-applications-team/qexp'> New qexp released! Click to update</a></b>
-`
-update.insertBefore(updatenotify,update.firstChild)
+  update=document.getElementsByClassName('navbar-nav')[0]
+  update.insertBefore(NewNode('li',['nav-link'])
+  .appendChild(Object.assign(NewNode('a'),{href:'https://gitlab.com/coldquanta/coldquanta-applications-team/qexp', innerHTML:' <b>New qexp released! Click to update</b>'})).parentNode,update.firstChild)
+  
 }
 
-//document.cookie='lastvisit='+Date.now()
 
-  //Make Sidebar Functional
-  (function () {
-    'use strict'
-    document.querySelector('#sidebar-button').addEventListener('click', function () {
-      document.querySelector('.offcanvas-collapse').classList.toggle('open')
-      console.log("pressed")
-    })
-  })()
+///////////ENABLE GADETS////////////////////////////////////////
+
+//////Make Sidebar Functional
+(function () {
+  'use strict'
+  document.querySelector('#sidebar-button').addEventListener('click', function () {
+    document.querySelector('.offcanvas-collapse').classList.toggle('open')
+    console.log("pressed")
+  })
+})()
+
+//Old Copyright
 //document.getElementById('copyright').innerHTML=`©(2020-${new Date().getFullYear()}) UCSB ILG, Design by Kelly Ann Pawlak`
 
-  //Function that determines the page to display based on URL Variable.
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  var linkfile = urlParams.get('linkfile')
-  if (linkfile == null) {
-    linkfile = 'Home'
-  }
 
-  function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
+///////////READ URL VARIABLE AND LOAD PAGE.///////////////////////////////////////
+//Function that determines the page to display based on URL Variable.
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var linkfile = urlParams.get('linkfile')
+if (linkfile == null) {
+  linkfile = 'Home'
 }
-
-
 
 init_nav(linkfile)
 
-  
