@@ -12,7 +12,6 @@ function importDirData() {
 }
 
 function returnJSONdata(file, project_directory, callback) {
-    console.log('qexp_data/'+file)
     fetch('./'+file)
         .then(response => {
             return response.json();
@@ -24,14 +23,16 @@ function returnJSONdata(file, project_directory, callback) {
 
 
 function initiateNavBar(directory_data) {
-    
-    for (var project_name in directory_data) {
-        if (project_name.includes('.') != true && project_name != 'index' && project_name != 'pages') {   
+    console.log('directory data',directory_data)
+    console.log('PN KEYS',Object.keys(directory_data).sort())
+    Object.keys(directory_data).sort().forEach((project)=>{
+       console.log(project)
+        if (project.includes('.') != true && project!= 'index' && project != 'pages') {   
             project_directory=
-            returnJSONdata("/"+project_name+"/info", directory_data[project_name],build_accordion)
+            returnJSONdata("/"+project+"/info", directory_data[project],build_accordion)
             
         }
-    }  
+    }  )
 }
 
 
@@ -41,7 +42,9 @@ function build_accordion(project_directory, data){
     let node=NewNode('div',['accordion-item'])
     node.appendChild(accordion_header(data,state))
     Object.keys(project_directory).sort().reverse().filter(element => element!='info').sort().forEach((date)=>{
+        
         data['date']=date
+        console.log('date', data['date'], 'project',data['name'])
         data['text_date']=date.substring(2, 4) + '/' + date.substring(4, 6) + '/' + date.substring(0, 2)
         state['level']=2
         l2_node=node
@@ -100,7 +103,7 @@ function accordion_header(data, state){
         case 3:
             tag='div'
             CL=null
-            innerHTML= `<a class="nav-link lvl3 run" type="button"  aria-expanded="true" id='${data['projectname']}/${data['date']}/${data['run']}' onclick="importRun('${data['projectname']}/${data['date']}/${data['run']}','${data['name']}','${data['description']}')">
+            innerHTML= `<a class="nav-link lvl${state['level']} run" type="button"  aria-expanded="true" id='${data['projectname']}/${data['date']}/${data['run']}' onclick="importRun('${data['projectname']}/${data['date']}/${data['run']}','${data['name']}','${data['description']}')">
             <small> ${data['run-text']} </small>
           </a>`
             break;
@@ -113,6 +116,7 @@ function accordion_header(data, state){
             id:"heading" + datalabel
         }
     )
+   
     if(state['level']!=3){
     button= node.appendChild(Object.assign(
         NewNode('button'),
@@ -123,6 +127,7 @@ function accordion_header(data, state){
     button.setAttribute('aria-controls', `collapse${datalabel}`)
     button.setAttribute('data-bs-toggle','collapse')
     button.setAttribute('data-bs-target',`#collapse${datalabel}`)
+    console.log(state,'datalabel:', datalabel)
 }else{
     node.innerHTML=innerHTML
 }
