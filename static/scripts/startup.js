@@ -67,7 +67,7 @@ function AlertUpdate(){
 })()
 
 //COLDQUANTA CONFIDENTIAL
-document.getElementById('copyright').innerHTML=`<b>COLDQUANTA CONFIDENTIAL.</b> Distribution of this program or information `
+document.getElementById('copyright').innerHTML=`<b>COLDQUANTA CONFIDENTIAL.</b> Distribution of this software or ColdQuanta IP is strictly prohibitted`
 
 
 ///////////READ URL VARIABLE AND LOAD PAGE.///////////////////////////////////////
