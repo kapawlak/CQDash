@@ -229,11 +229,11 @@ function DisplayData(location) {
         row_data.appendChild(Object.assign(NewNode('td', ['text-center', 'align-middle']), {
           innerHTML:
             `<span title='${mop[op][i]["fidelity"]["value"]}'>${mop[op][i]["fidelity"]["value"].toFixed(3)} </span><br>
-      <small class="bs-lightgray" style="font-size:80%" title="${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)}">
-       (${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)}
+      <small class="bs-lightgray" style="font-size:80%" title="${mop[op][i]["fidelity"]["lower_sigma"].toFixed(4)}">
+       (${mop[op][i]["fidelity"]["lower_sigma"].toFixed(4)}
       </small> 
-      <small class="bs-lightgray" style="font-size:80%" title='${mop[op][i]["fidelity"]["lower_sigma"]}'>,
-       ${mop[op][i]["fidelity"]["lower_sigma"].toFixed(4)})
+      <small class="bs-lightgray" style="font-size:80%" title='${mop[op][i]["fidelity"]["upper_sigma"]}'>,
+       ${mop[op][i]["fidelity"]["upper_sigma"].toFixed(4)})
       </small>`,
           style: `background-color:${cellColor(mop[op][i]["fidelity"]["value"], single_qubit_tolerance[op][0], single_qubit_tolerance[op][1])}`
         }))
@@ -283,11 +283,11 @@ function DisplayData(location) {
               cell_values = (cz_table[i][j] || cz_table[j][i])
               datacell.innerHTML +=
                 `<b>CZ</b>: <span title='${cell_values["value"]}'>${cell_values["value"].toFixed(3)} </span><br>
-              <small class="bs-lightgray" style="font-size:80%" title="${cell_values["upper_sigma"].toFixed(4)}">
-                (${cell_values["upper_sigma"].toFixed(4)}
+              <small class="bs-lightgray" style="font-size:80%" title="${cell_values["lower_sigma"].toFixed(4)}">
+                (${cell_values["lower_sigma"].toFixed(4)}
               </small> 
-              <small class="bs-lightgray" style="font-size:80%" title='${cell_values["lower_sigma"]}'>,
-                ${cell_values["lower_sigma"].toFixed(4)})
+              <small class="bs-lightgray" style="font-size:80%" title='${cell_values["upper_sigma"]}'>,
+                ${cell_values["upper_sigma"].toFixed(4)})
               </small>`;
             }
             datacell.style.backgroundColor = cellColor(cell_values["value"], 0.95, 0.03)
@@ -412,7 +412,7 @@ function cardSummary() {
   var description = ``
     ;
 
-  if (PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'] && Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']).includes('info')) {
+  if (Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]).includes('exports') && PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports'] && Object.keys(PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']).includes('info')) {
     description = PAGESTATE['run-data'].data['runs'][PAGESTATE['run']]['exports']['info']
   }
   
