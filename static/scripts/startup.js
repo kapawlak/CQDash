@@ -66,8 +66,8 @@ function AlertUpdate(){
   })
 })()
 
-//Old Copyright
-//document.getElementById('copyright').innerHTML=`©(2020-${new Date().getFullYear()}) UCSB ILG, Design by Kelly Ann Pawlak`
+//COLDQUANTA CONFIDENTIAL
+document.getElementById('copyright').innerHTML=`<b>COLDQUANTA CONFIDENTIAL.</b> Distribution of this program or information `
 
 
 ///////////READ URL VARIABLE AND LOAD PAGE.///////////////////////////////////////
