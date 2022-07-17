@@ -424,22 +424,22 @@ function cardSummary() {
       quick_math(summary_space.appendChild(
       ListItem(["list-group-item"], ` <div class="fw-bold">Run Information:</div> ${description}`)))
   }
+  if( version_to_int(PAGESTATE['run-data'].data['versions']['qiskit-coldquanta'])<version_to_int("0.0.15")){
+    summary_space.append(exportToList(),
+    ListItem(["list-group-item"], 
+        `<div class="fw-bold">Job Tokens:</div>
+        <span class='badge bg-primary' style='cursor:pointer' onclick="copytoClipboard('${PAGESTATE['run-data']['runs'][0]['jobdata']['_job_id']}')">
+        job_id: ${PAGESTATE['run-data']['runs'][0]['jobdata']['_job_id']}
+        </span>
+        <span class='badge bg-dark' style='cursor:pointer' onclick="copytoClipboard('${PAGESTATE['run-data']['runs'][0]['jobdata']['qobj_id']}')">
+        qobj_id: ${PAGESTATE['run-data']['runs'][0]['jobdata']['qobj_id']}
+        </span>
+        <span class='badge bg-CQ-orange' style='cursor:pointer' onclick="copytoClipboard('${Object.keys(PAGESTATE['run-data']['runs'][0]['jobdata']['backend_jobs'])[0]}')">
+        backend_job: ${Object.keys(PAGESTATE['run-data']['runs'][0]['jobdata']['backend_jobs'])[0]}
+        </span>
+        `))
 
-  summary_space.append(exportToList(),
-  ListItem(["list-group-item"], 
-      `<div class="fw-bold">Job Tokens:</div>
-      <span class='badge bg-primary' style='cursor:pointer' onclick="copytoClipboard('${PAGESTATE['run-data']['runs'][0]['jobdata']['_job_id']}')">
-      job_id: ${PAGESTATE['run-data']['runs'][0]['jobdata']['_job_id']}
-      </span>
-      <span class='badge bg-dark' style='cursor:pointer' onclick="copytoClipboard('${PAGESTATE['run-data']['runs'][0]['jobdata']['qobj_id']}')">
-      qobj_id: ${PAGESTATE['run-data']['runs'][0]['jobdata']['qobj_id']}
-      </span>
-      <span class='badge bg-CQ-orange' style='cursor:pointer' onclick="copytoClipboard('${Object.keys(PAGESTATE['run-data']['runs'][0]['jobdata']['backend_jobs'])[0]}')">
-      backend_job: ${Object.keys(PAGESTATE['run-data']['runs'][0]['jobdata']['backend_jobs'])[0]}
-      </span>
-      `))
-
-
+}
   return node
 }
 

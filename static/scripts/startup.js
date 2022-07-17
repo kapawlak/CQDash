@@ -26,18 +26,23 @@ SOFTWARE.
 
 
 ///////////VERSION CHECK///////////////////////////////////////
+// const VERSIONtest='0.1.0'
+latest_version='0.2.2'
 
-latest_version='0.1.8'
+function version_to_int(ver){
+  var vsplit=ver.split('.').map(Number)
+  var BaseArray=[10000,100,1]
+  dot = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
+  var vint=dot(vsplit, BaseArray)
+  console.log(vint)
+  return vint
+}
+
 
 if (VERSION == null || VERSION == 0) {
   AlertUpdate();
 } else {
-  LV = latest_version.split('.').map(Number)
-  V = VERSION.split('.').map(Number)
-  BaseArray=[10000,100,1]
-  dot = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
-  console.log(LV, V)
-  if(dot(LV,BaseArray)>dot(V,BaseArray)){
+  if(version_to_int(latest_version)>version_to_int(VERSION)){
     AlertUpdate()
   }
 }
