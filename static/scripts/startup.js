@@ -27,7 +27,7 @@ SOFTWARE.
 
 ///////////VERSION CHECK///////////////////////////////////////
 // const VERSIONtest='0.1.0'
-latest_version='0.2.2'
+latest_version='0.2.1'
 
 function version_to_int(ver){
   var vsplit=ver.split('.').map(Number)
