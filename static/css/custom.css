@@ -11489,4 +11489,15 @@ h5.text-responsive, .text-responsive.h5 {
   padding-top: 4px !important;
   padding-bottom: 4px !important; }
 
+.Video {
+  background-color: #99ccff;
+  border: 0px solid black;
+  border-radius: 0.25rem !important; }
+  .Video .card-footer, .Video .card-header {
+    background-color: #3399FF;
+    color: white; }
+  .Video .card-body {
+    padding: 0 !important;
+    border-radius: 0.25rem !important; }
+
 /*# sourceMappingURL=custom.css.map */

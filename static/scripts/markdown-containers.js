@@ -81,6 +81,11 @@ class Card{
         this.styleList.push('col-lg-10', 'mx-auto', 'my-3', 'px-0')
         this.innerStyles[1]+=' mt-5, mx-0, px-0 '
         break
+      case 'Video':
+        this.styleList.push('col-lg-8', 'mx-auto', 'my-4')
+        this.innerStyles[1]+=' ratio ratio-16x9'
+        this.footerText= `Video ${this.number}`
+        break
       case 'Note':
         this.styleList.push('mx-auto', 'my-4', 'col-8 bg-gradient')
         this.innerStyles[1]='text-center'
@@ -320,6 +325,27 @@ md.use(container, 'Code', {
   }
 })
 ///
+
+///VIDEO
+md.use(container, 'Video', {
+  // Input Format is: 
+  // Video (reference-name| optional-header)
+    render: function (tokens, idx) {
+      let args;
+      if (tokens[idx].nesting === 1) {
+        args = strip(tokens[idx].info.trim().match(/^Video(.*)$/)[1])
+        let vid= new Card("Video", args[0])
+        vid.footerText+=( args[1]? ': ' + args[1] : '')
+        vid.publishCard()
+  
+        return DIVHEAD.pop()
+      } else {
+        return DIVFOOT.pop()
+      }
+    }
+  })
+  ///
+
 
 ///NOTE
 md.use(container, 'Note', {

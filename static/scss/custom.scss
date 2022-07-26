@@ -1191,3 +1191,22 @@ body {
   
   }
   
+
+  .Video {
+
+    background-color: tint-color($CQ-blue,50%);
+    border:0px solid black;
+    border-radius:$border-radius!important;
+    
+    .card-footer, .card-header{
+        background-color: $CQ-blue;
+        color:white;
+    }
+
+    .card-body{
+        padding:0!important;
+        border-radius:$border-radius!important;
+    }
+
+   
+}
